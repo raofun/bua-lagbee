@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Escrow Wallet &amp; Payments | Bua Lagbe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#141d1f",
+                    "secondary": "#236863",
+                    "on-tertiary-container": "#ffd8b2",
+                    "tertiary-fixed-dim": "#ffb86b",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f2fbfe",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "primary": "#006D77",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#141d1f",
+                    "on-secondary-container": "#286d67",
+                    "background": "#f2fbfe",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-low": "#ecf5f8",
+                    "surface-tint": "#006972",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#e9f2f5",
+                    "inverse-surface": "#293234",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#6d4000",
+                    "surface-container-highest": "#dbe4e7",
+                    "outline": "#6f797a",
+                    "on-tertiary-fixed": "#2c1700",
+                    "on-secondary-fixed": "#00201e",
+                    "primary-fixed": "#9ff0fb",
+                    "secondary-fixed": "#acefe7",
+                    "primary-container": "#006D77",
+                    "surface-dim": "#d2dcde",
+                    "tertiary-container": "#8e5500",
+                    "surface-container-high": "#e1eaed",
+                    "on-surface-variant": "#3e494a",
+                    "on-primary-container": "#9becf7",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "inverse-primary": "#82d3de",
+                    "outline-variant": "#bec8ca",
+                    "tertiary-fixed": "#ffdcbc",
+                    "surface-bright": "#f2fbfe",
+                    "surface-container": "#e6eff2",
+                    "on-tertiary-fixed-variant": "#683d00",
+                    "surface-variant": "#dbe4e7",
+                    "secondary-container": "#a9ece5",
+                    "on-primary-fixed": "#001f23",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "8px",
+                    "lg": "8px",
+                    "xl": "8px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f2fbfe; color: #141d1f; }
+        .headline { font-family: 'Manrope', sans-serif; letter-spacing: -0.02em; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation -->
+<header class="bg-[#f2fbfe] dark:bg-slate-900 sticky top-0 z-50 border-b border-surface-container">
+<nav class="flex justify-between items-center w-full px-8 py-4">
+<div class="text-2xl font-black text-[#006D77] dark:text-cyan-500 headline">Bua Lagbe</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#006D77] transition-colors font-medium text-sm" href="#">Marketplace / মার্কেটপ্লেস</a>
+<a class="text-[#006D77] dark:text-cyan-400 font-bold border-b-2 border-[#006D77] transition-colors text-sm" href="#">Wallet / ওয়ালেট</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#006D77] transition-colors font-medium text-sm" href="#">Attendance / উপস্থিতি</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-tertiary text-white px-4 py-2 rounded-lg font-bold text-xs tracking-wide">SOS / এসওএস</button>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8 md:py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Sidebar Navigation (Web) -->
+<aside class="hidden lg:flex lg:col-span-3 flex-col gap-2 h-fit">
+<div class="mb-8 px-4">
+<h2 class="headline text-xl font-bold text-primary">Admin Console / অ্যাডমিন কনসোল</h2>
+<p class="text-xs text-slate-500">Platform Control / প্ল্যাটফর্ম নিয়ন্ত্রণ</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-white/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard / ড্যাশবোর্ড</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-white/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium text-sm">User Management / ব্যবহারকারী ব্যবস্থাপনা</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-primary font-bold rounded-lg shadow-sm border border-primary/10" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-bold text-sm">Financials / আর্থিক হিসাব</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-white/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-medium text-sm">Verification / যাচাইকরণ</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-white/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Settings / সেটিংস</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="lg:col-span-9 space-y-8">
+<!-- Hero Section: Escrow Balance -->
+<section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#006D77] to-[#004f56] p-8 md:p-12 text-white">
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="text-xs font-semibold uppercase tracking-widest text-primary-fixed">Secured in Escrow / এসক্রোতে সংরক্ষিত</span>
+</div>
+<h1 class="headline text-4xl md:text-5xl font-extrabold mb-2 leading-tight">Monthly Salary in Escrow / মাসিক বেতন এসক্রোতে</h1>
+<p class="text-primary-fixed opacity-90 text-sm font-medium mb-8">Funds are locked and ready for distribution / অর্থ নিরাপদে সংরক্ষিত এবং বিতরণের জন্য প্রস্তুত</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white text-[#006D77] px-6 py-3 rounded-lg font-bold headline text-sm flex items-center gap-2 hover:scale-95 transition-transform">
+                                    Release Funds / অর্থ প্রদান করুন <span class="material-symbols-outlined" data-icon="payments">payments</span>
+</button>
+<button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-lg font-bold headline text-sm flex items-center gap-2 hover:bg-white/20 transition-all">
+                                    Add Tip / বকশিশ দিন <span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+</button>
+</div>
+</div>
+<div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
+<div class="text-xs font-medium text-primary-fixed mb-1 uppercase tracking-wider">Total Balance / মোট ব্যালেন্স</div>
+<div class="headline text-5xl font-black mb-6">৳ 18,500.00</div>
+<div class="flex items-center gap-3 text-xs text-primary-fixed font-semibold">
+<span class="material-symbols-outlined text-green-300" data-icon="lock">lock</span>
+                                Next release scheduled: Aug 1, 2024 / পরবর্তী প্রদান: ১ আগস্ট, ২০২৪
+                            </div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Financial Breakdown: Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Base Salary -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-secondary bg-secondary-container/30 p-2 rounded-lg" data-icon="wallet">wallet</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Itemized / বিস্তারিত</span>
+</div>
+<p class="text-slate-500 font-medium text-xs mb-1">Base Salary / মূল বেতন</p>
+<h3 class="headline text-2xl font-bold text-primary">৳ 15,000.00</h3>
+</div>
+<!-- Performance Bonus -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low border-l-4 border-green-500">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-green-600 bg-green-100 p-2 rounded-lg" data-icon="trending_up">trending_up</span>
+<span class="text-[10px] font-bold text-green-600 uppercase tracking-widest">Bonus / বোনাস</span>
+</div>
+<p class="text-slate-500 font-medium text-xs mb-1">Performance Bonus / পারফরম্যান্স বোনাস</p>
+<h3 class="headline text-2xl font-bold text-green-600">+ ৳ 4,200.00</h3>
+</div>
+<!-- Deductions -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low border-l-4 border-error">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-error bg-error-container/30 p-2 rounded-lg" data-icon="event_busy">event_busy</span>
+<span class="text-[10px] font-bold text-error uppercase tracking-widest">Deduction / কর্তন</span>
+</div>
+<p class="text-slate-500 font-medium text-xs mb-1">Absences (3 days) / অনুপস্থিতি (৩ দিন)</p>
+<h3 class="headline text-2xl font-bold text-error">- ৳ 700.00</h3>
+</div>
+</section>
+<!-- Transparency Section & Invoices -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Security Statement -->
+<div class="bg-surface-container-high rounded-2xl p-8 flex flex-col justify-center border border-surface-container-highest">
+<div class="max-w-sm">
+<h2 class="headline text-2xl font-extrabold text-primary mb-4">Transparency &amp; Financial Security / স্বচ্ছতা এবং আর্থিক নিরাপত্তা</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Our escrow system ensures that your funds are protected until the service is verified / আমাদের এসক্রো সিস্টেম নিশ্চিত করে যে পরিষেবা যাচাই না হওয়া পর্যন্ত আপনার অর্থ নিরাপদ থাকবে।</p>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="verified_user">verified_user</span>
+<span class="font-bold text-xs uppercase tracking-wider">End-to-end Encrypted Records / সম্পূর্ণ এনক্রিপ্টেড রেকর্ড</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="history_edu">history_edu</span>
+<span class="font-bold text-xs uppercase tracking-wider">Digital Contracts / ডিজিটাল চুক্তি</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Invoices -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container-low">
+<div class="flex justify-between items-center mb-6">
+<h2 class="headline text-xl font-bold text-on-surface">Recent Invoices / সাম্প্রতিক ইনভয়েস</h2>
+<button class="text-primary font-bold text-xs hover:underline uppercase tracking-widest">View All / সব দেখুন</button>
+</div>
+<div class="space-y-3">
+<!-- Invoice Item -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg group hover:bg-surface-container-low transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+</div>
+<div>
+<p class="font-bold text-sm">Invoice #INV-2024-07 / ইনভয়েস</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">July 2024 • Paid / জুলাই ২০২৪ • পরিশোধিত</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="font-bold text-sm">৳ 17,800.00</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary cursor-pointer transition-colors" data-icon="download">download</span>
+</div>
+</div>
+<!-- Invoice Item -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg group hover:bg-surface-container-low transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+</div>
+<div>
+<p class="font-bold text-sm">Invoice #INV-2024-06 / ইনভয়েস</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">June 2024 • Paid / জুন ২০২৪ • পরিশোধিত</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="font-bold text-sm">৳ 16,500.00</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary cursor-pointer transition-colors" data-icon="download">download</span>
+</div>
+</div>
+<!-- Invoice Item -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg group hover:bg-surface-container-low transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+</div>
+<div>
+<p class="font-bold text-sm">Invoice #INV-2024-05 / ইনভয়েস</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">May 2024 • Paid / মে ২০২৪ • পরিশোধিত</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="font-bold text-sm">৳ 16,500.00</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary cursor-pointer transition-colors" data-icon="download">download</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_-4px_20px_rgba(20,29,31,0.04)] z-50 rounded-t-2xl border-t border-surface-container">
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="text-[9px] font-bold mt-1 uppercase tracking-tighter">Home / হোম</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-2xl" data-icon="assignment">assignment</span>
+<span class="text-[9px] font-bold mt-1 uppercase tracking-tighter">Tasks / কাজ</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#006D77] text-white rounded-lg px-5 py-2 scale-90">
+<span class="material-symbols-outlined text-2xl" data-icon="payments">payments</span>
+<span class="text-[9px] font-bold mt-1 uppercase tracking-tighter">Wallet / ওয়ালেট</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-2xl" data-icon="contact_support">contact_support</span>
+<span class="text-[9px] font-bold mt-1 uppercase tracking-tighter">Support / সহায়তা</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety &amp; Support | Bua Lagbe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#9becf7",
+                      "outline": "#6f797a",
+                      "surface-variant": "#e1e3e4",
+                      "surface-dim": "#d8dadb",
+                      "surface-container-low": "#f2f4f5",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "secondary": "#236863",
+                      "inverse-primary": "#82d3de",
+                      "on-surface": "#191c1d",
+                      "background": "#f8fafa",
+                      "surface-container": "#eceeef",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#00504b",
+                      "inverse-on-surface": "#eff1f2",
+                      "surface-bright": "#f8fafa",
+                      "on-secondary-fixed": "#00201e",
+                      "tertiary-fixed-dim": "#ffb86b",
+                      "secondary-fixed-dim": "#90d3cb",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#ffd8b2",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f8fafa",
+                      "secondary-fixed": "#acefe7",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1d",
+                      "surface-tint": "#006972",
+                      "on-surface-variant": "#3e494a",
+                      "tertiary-container": "#8e5500",
+                      "on-tertiary-fixed": "#2c1700",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#a9ece5",
+                      "tertiary-fixed": "#ffdcbc",
+                      "inverse-surface": "#2e3132",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#9ff0fb",
+                      "on-primary-fixed-variant": "#004f56",
+                      "on-secondary-container": "#286d67",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#001f23",
+                      "error": "#ba1a1a",
+                      "primary": "#006D77",
+                      "surface-container-high": "#e6e8e9",
+                      "outline-variant": "#bec8ca",
+                      "tertiary": "#6d4000",
+                      "primary-fixed-dim": "#82d3de",
+                      "primary-container": "#006D77"
+              },
+              "borderRadius": {
+                      "DEFAULT": "8px",
+                      "lg": "8px",
+                      "xl": "8px",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Manrope"],
+                      "label": ["Manrope"]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(248, 250, 250, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sos-gradient {
+            background: linear-gradient(135deg, #006D77 0%, #004f56 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 glass-nav border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-6 py-4 max-w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tight text-primary">Bua Lagbe</span>
+<nav class="hidden md:flex items-center gap-6 font-headline font-semibold text-sm antialiased">
+<a class="text-[#191c1d]/70 hover:text-primary transition-colors" href="#">Dashboard (ড্যাশবোর্ড)</a>
+<a class="text-[#191c1d]/70 hover:text-primary transition-colors" href="#">Marketplace (মার্কেটপ্লেস)</a>
+<a class="text-[#191c1d]/70 hover:text-primary transition-colors" href="#">Wallet (ওয়ালেট)</a>
+<a class="text-[#191c1d]/70 hover:text-primary transition-colors" href="#">Attendance (উপস্থিতি)</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 bg-error text-white px-5 py-2 rounded-lg font-bold text-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">emergency</span>
+                SOS Help (জরুরি সাহায্য)
+            </button>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">translate</span>
+<img alt="User profile" class="w-9 h-9 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzwqSILb_BLlOR4frHKVvJHj5Ayb3rrMQfvFqqXHpJ7mHdOeLellNONQtFe_Ft8UpyDIPXavsHH2XMo0x2UHcGLlCKvoyTyw9D6uRRPUiykZGLFmnvwbXGIl3KXMVMBsuh1BmajvOGAgbGGC2_nHzQn7Zqv-Et5dFibJndqOuIhORelZUuKebxATF-spz53tkIv-R7en0P9xILh-hnpUHXEub1pscSIXtpiIfIiAsFaOGA-nX1Pvfqx3we702dF3VOfM0dV4FDrkrR"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-32 px-6 max-w-6xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-14">
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-3">Safety &amp; Support Center</h1>
+<h2 class="text-xl font-bold text-primary mb-4">নিরাপত্তা এবং সহায়তা কেন্দ্র</h2>
+<p class="text-on-surface-variant max-w-3xl leading-relaxed">
+            We are here to ensure your safety and provide immediate assistance for your service needs. <br/>
+            আপনার নিরাপত্তা নিশ্চিত করতে এবং তাৎক্ষণিক সহায়তা প্রদানের জন্য আমরা সবসময় আপনার পাশে আছি।
+        </p>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: SOS -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-xl leading-tight">Emergency SOS</h3>
+<p class="text-sm font-bold text-error">জরুরি এসওএস</p>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant mb-8 leading-relaxed">
+                    Swipe to trigger an immediate alert to our 24/7 safety team. <br/>
+                    আমাদের ২৪/৭ নিরাপত্তা দলকে তাৎক্ষণিক সংকেত পাঠাতে সোয়াইপ করুন।
+                </p>
+<!-- SOS Slider -->
+<div class="relative w-full h-16 bg-surface-container rounded-full p-1 overflow-hidden group">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-xs font-bold text-on-surface/40 uppercase tracking-widest pointer-events-none">Slide to Notify (সোয়াইপ করুন)</span>
+</div>
+<div class="h-14 w-14 sos-gradient rounded-full flex items-center justify-center text-white cursor-pointer shadow-lg active:translate-x-[calc(100%*3.8)] transition-transform duration-500 ease-in-out">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="mt-8 flex flex-col gap-3">
+<button class="flex items-center justify-between w-full p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_police</span>
+<span class="text-sm font-semibold">Police / পুলিশ (৯৯৯)</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">call</span>
+</button>
+<button class="flex items-center justify-between w-full p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+<span class="text-sm font-semibold">Ambulance / অ্যাম্বুলেন্স (১০৬)</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">call</span>
+</button>
+</div>
+</div>
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/10 flex gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<h4 class="font-bold text-sm">You are Protected (আপনি সুরক্ষিত)</h4>
+<p class="text-xs text-on-surface-variant">Your current session is being monitored. (আপনার সেশনটি পর্যবেক্ষণ করা হচ্ছে)</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Wizard -->
+<div class="lg:col-span-2">
+<div class="bg-surface-container-low p-8 rounded-xl h-full border border-outline-variant/20">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h2 class="font-headline font-extrabold text-2xl">Substitution Wizard</h2>
+<p class="text-sm text-primary font-bold">প্রতিস্থাপন উইজার্ড: সাহায্যকারীর বিকল্প খুঁজুন</p>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-bold text-primary uppercase">Step 1 of 3 (ধাপ ১/৩)</span>
+</div>
+</div>
+<div class="flex gap-2 mb-10">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-outline-variant rounded-full"></div>
+<div class="h-1.5 flex-1 bg-outline-variant rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Reason / কারণ</label>
+<select class="w-full bg-surface-container-lowest border-0 rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20">
+<option>Helper on Leave (ছুটি)</option>
+<option>Emergency Absence (জরুরি অনুপস্থিতি)</option>
+<option>Performance Issue (কাজের সমস্যা)</option>
+<option>Temporary Extra Help (অতিরিক্ত সাহায্য)</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Duration / সময়কাল</label>
+<div class="grid grid-cols-2 gap-3">
+<button class="p-4 rounded-lg border-2 border-primary bg-primary/10 text-primary font-bold text-sm">Short Term (স্বল্পমেয়াদী)</button>
+<button class="p-4 rounded-lg border-2 border-transparent bg-surface-container-lowest hover:border-outline-variant transition-all text-sm font-medium">Long Term (দীর্ঘমেয়াদী)</button>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Work Type / কাজের ধরন</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-surface-container-highest rounded-full text-xs font-semibold">Cleaning (পরিচ্ছন্নতা)</span>
+<span class="px-3 py-1.5 bg-surface-container-highest rounded-full text-xs font-semibold">Cooking (রান্না)</span>
+<span class="px-3 py-1.5 bg-primary text-white rounded-full text-xs font-semibold">All-rounder (সব কাজ)</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col items-center justify-center text-center border border-outline-variant/10 shadow-sm">
+<img alt="Substitution Wizard Visual" class="w-32 h-32 rounded-full object-cover mb-6 ring-4 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNedHSmVb51whB2_kIPQ-zFo39SjDQuTI3XWyG5lSqokHknabu2Q33gOXVwzYkA9zsK8W0kQvUuDKF4ZbPmaq_B3Csob17fTCYhQOsYPsxqZgDm14geXBIqO9u4_Po1gbd4GQK_rsgCIhujuEc8ah8h0jQ7cmbaStOGVwN7N6W67V6u0ifqmU9Xa8qNWbxHJYya4kDbxxJFs2yMRlRe3oTayeGuWzJITe-2FKqYhLxZZKqnYhhFDOR5sJJ6CdNW5g8gkkFWGFXQQ3n"/>
+<h4 class="font-headline font-bold text-lg mb-2">Ready to Search?</h4>
+<p class="text-xs text-on-surface-variant mb-6 px-2">
+                            Our algorithm will find 3 top-rated substitutes within 30 minutes. <br/>
+                            আমাদের সিস্টেম ৩০ মিনিটের মধ্যে ৩ জন দক্ষ বিকল্প খুঁজে দেবে।
+                        </p>
+<button class="w-full bg-primary text-white py-4 rounded-lg font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                            Find Substitutes (বিকল্প খুঁজুন)
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Support Cards -->
+<section class="mt-16">
+<h2 class="font-headline font-extrabold text-2xl mb-8">Direct Assistance (সরাসরি সহায়তা)</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Chat Support -->
+<div class="bg-surface-container-low p-7 rounded-xl group hover:bg-surface-container transition-all cursor-pointer border border-outline-variant/10">
+<div class="w-12 h-12 bg-secondary/10 text-secondary rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<h3 class="font-bold text-lg mb-1">Live Chat (লাইভ চ্যাট)</h3>
+<p class="text-sm text-on-surface-variant mb-4">তাত্ক্ষণিক চ্যাট: Support in Bengali and English.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span>Start Conversation (শুরু করুন)</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<!-- Call Support -->
+<div class="bg-surface-container-low p-7 rounded-xl group hover:bg-surface-container transition-all cursor-pointer border border-outline-variant/10">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">call</span>
+</div>
+<h3 class="font-bold text-lg mb-1">Call Center (কল সেন্টার)</h3>
+<p class="text-sm text-on-surface-variant mb-4">হেল্পলাইন: 24/7 dedicated assistance for owners.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span>+880 1234-567890</span>
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</div>
+</div>
+<!-- Dispute Center -->
+<div class="bg-surface-container-low p-7 rounded-xl group hover:bg-surface-container transition-all cursor-pointer border border-outline-variant/10">
+<div class="w-12 h-12 bg-tertiary/10 text-tertiary rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<h3 class="font-bold text-lg mb-1">Dispute Resolution (বিরোধ নিষ্পত্তি)</h3>
+<p class="text-sm text-on-surface-variant mb-4">ফরমাল সাপোর্ট: Formal mediation for any conflicts.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span>Open a Ticket (অভিযোগ জমা দিন)</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface/60 p-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-bold text-[10px] uppercase mt-1">Home (নীড়)</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/60 p-2" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-bold text-[10px] uppercase mt-1">Tracker (ট্র্যাকার)</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary text-white rounded-xl p-3 px-4 shadow-md" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-bold text-[10px] uppercase mt-1">Support (সহায়তা)</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/60 p-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-bold text-[10px] uppercase mt-1">Profile (প্রোফাইল)</span>
+</a>
+</nav>
+<!-- Floating Help -->
+<div class="fixed bottom-24 right-6 md:bottom-10 md:right-10 z-40">
+<button class="w-14 h-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center active:scale-90 transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</body></html>

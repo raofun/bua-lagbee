@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bua Lagbe | Customer Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#141d1f",
+                      "secondary": "#236863",
+                      "on-tertiary-container": "#ffd8b2",
+                      "tertiary-fixed-dim": "#ffb86b",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f2fbfe",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "primary": "#006D77",
+                      "on-secondary": "#ffffff",
+                      "on-surface": "#141d1f",
+                      "on-secondary-container": "#286d67",
+                      "background": "#f2fbfe",
+                      "on-primary-fixed-variant": "#004f56",
+                      "surface-container-low": "#ecf5f8",
+                      "surface-tint": "#006D77",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#e9f2f5",
+                      "inverse-surface": "#293234",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#6d4000",
+                      "surface-container-highest": "#dbe4e7",
+                      "outline": "#6f797a",
+                      "on-tertiary-fixed": "#2c1700",
+                      "on-secondary-fixed": "#00201e",
+                      "primary-fixed": "#9ff0fb",
+                      "secondary-fixed": "#acefe7",
+                      "primary-container": "#00535b",
+                      "surface-dim": "#d2dcde",
+                      "tertiary-container": "#8e5500",
+                      "surface-container-high": "#e1eaed",
+                      "on-surface-variant": "#3e494a",
+                      "on-primary-container": "#9becf7",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#90d3cb",
+                      "inverse-primary": "#82d3de",
+                      "outline-variant": "#bec8ca",
+                      "tertiary-fixed": "#ffdcbc",
+                      "surface-bright": "#f2fbfe",
+                      "surface-container": "#e6eff2",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "surface-variant": "#dbe4e7",
+                      "secondary-container": "#84D2C1",
+                      "on-primary-fixed": "#001f23",
+                      "primary-fixed-dim": "#82d3de",
+                      "on-secondary-fixed-variant": "#00504b",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.5rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f2fbfe; color: #141d1f; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-[#f2fbfe] dark:bg-slate-900 sticky top-0 z-50 transition-all duration-200 border-b border-surface-container-high">
+<div class="flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-primary dark:text-cyan-500 font-headline tracking-tighter">Bua Lagbe</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-primary dark:text-cyan-400 font-bold border-b-2 border-primary py-1 font-body text-xs tracking-tight transition-colors" href="#">Marketplace / মার্কেটপ্লেস</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors font-body text-xs tracking-tight" href="#">Wallet / ওয়ালেট</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors font-body text-xs tracking-tight" href="#">Attendance / হাজিরা</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Wallet & Subscription Info -->
+<div class="hidden lg:flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-lg">
+<div class="flex flex-col items-end">
+<span class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Balance / ব্যালেন্স</span>
+<span class="text-primary font-bold font-headline">৳ 4,250.00</span>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant opacity-20"></div>
+<div class="flex flex-col">
+<span class="text-[9px] font-semibold text-slate-500 uppercase tracking-widest">Subscription / সাবস্ক্রিপশন</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-amber-600 font-bold text-xs uppercase">GOLD / গোল্ড</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-red-600 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest hover:scale-95 duration-200 shadow-sm">SOS / জরুরি</button>
+<button class="text-slate-500 hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 pb-24">
+<!-- Hero & Refined Search Section -->
+<section class="py-12 md:py-20 relative overflow-hidden">
+<div class="relative z-10">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary tracking-tight leading-tight mb-6">
+                    Find the perfect <br/>
+<span class="text-secondary">household curator.</span>
+<br/>
+<span class="text-3xl md:text-5xl font-bold opacity-80 block mt-2">সেরা গৃহকর্মী খুঁজুন।</span>
+</h1>
+<!-- Refined Search & Filter Bar -->
+<div class="mt-12 max-w-5xl">
+<div class="glass-panel p-2 rounded-xl shadow-[0_12px_32px_rgba(20,29,31,0.04)] flex flex-col md:flex-row items-center gap-2 border border-surface-container-highest">
+<div class="flex-1 w-full flex items-center px-4 gap-3 bg-surface-container-low rounded-lg py-3">
+<span class="material-symbols-outlined text-primary/60">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-body" placeholder="Search by skills or name... / দক্ষতা বা নাম দিয়ে খুঁজুন..." type="text"/>
+</div>
+<div class="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto">
+<div class="relative flex-1 md:w-48 px-4 py-3 bg-surface-container-low rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary/60">location_on</span>
+<select class="bg-transparent border-none focus:ring-0 text-xs font-semibold w-full appearance-none">
+<option>Dhaka, Banani / ঢাকা, বনানী</option>
+<option>Dhaka, Gulshan / ঢাকা, গুলশান</option>
+<option>Dhaka, Uttara / ঢাকা, উত্তরা</option>
+</select>
+</div>
+<div class="relative flex-1 md:w-48 px-4 py-3 bg-surface-container-low rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary/60">construction</span>
+<select class="bg-transparent border-none focus:ring-0 text-xs font-semibold w-full appearance-none">
+<option>All Skills / সকল দক্ষতা</option>
+<option>Chef / বাবুর্চি</option>
+<option>Housekeeping / পরিচ্ছন্নতাকর্মী</option>
+<option>Nanny / আয়া</option>
+</select>
+</div>
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-low rounded-lg flex-1 md:w-auto whitespace-nowrap">
+<input class="rounded text-primary focus:ring-primary h-4 w-4 border-outline-variant/30" id="verified" type="checkbox"/>
+<label class="text-[10px] font-bold text-primary flex items-center gap-1 uppercase" for="verified">
+                                    Verified Only / ভেরিফাইড
+                                    <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</label>
+</div>
+<button class="w-full md:w-auto bg-primary text-white px-8 py-3 rounded-lg font-bold text-sm hover:brightness-110 transition-all shadow-md">
+                                Explore / খুঁজুন
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Abstract background element -->
+<div class="absolute top-0 right-0 -z-0 opacity-10 transform translate-x-1/4 -translate-y-1/4">
+<div class="w-96 h-96 rounded-full bg-gradient-to-br from-primary to-secondary-container blur-3xl"></div>
+</div>
+</section>
+<!-- Grid of Helper Cards -->
+<section class="mt-8">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline text-3xl font-bold text-primary">Top Curators / সেরা কর্মীগণ</h2>
+<p class="text-slate-500 font-body text-sm mt-1">Available professionals in your selected area. / আপনার এলাকার দক্ষ কর্মীগণ।</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-primary text-white transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-low text-slate-400 hover:bg-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0_4px_20px_rgba(20,29,31,0.03)] border border-surface-container-highest group hover:translate-y-[-4px] transition-all duration-300">
+<div class="relative rounded-lg overflow-hidden h-64 mb-5">
+<img alt="Professional Housekeeper" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDce2iccjxH57EwkdVn-QtCNllmmkzGGQ7IdkIoOXk9r_jsJRoBTwnl84myxtz6-xW2hnM7raau8j0Jggc0F8FX00XbiEXzYXGUcIa0s8syX2Be_mIul-SERRCoZyfG5rxSDh2tKEl7zYsgifVGonww5io9BnywH5K4HBR9HQF3L5vTjDnYVo2o-6npPstAprJLdhhAcamficiS3cVyDdIqVdMEEX5dOTzvSt6yR4mF7iq7UPQYuLkDLS282Zqj3lBgLzNBEcx7jtNM"/>
+<div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[9px] font-extrabold text-primary tracking-widest uppercase">NID Verified / এনআইডি ভেরিফাইড</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Rahima Khatun</h3>
+<div class="flex items-center gap-1 text-slate-500 text-xs mt-0.5">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                Banani, Dhaka / বনানী, ঢাকা
+                            </div>
+</div>
+<div class="flex items-center gap-1 bg-secondary-container/20 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-secondary font-bold text-xs">4.9</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Chef / বাবুর্চি</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Bengali / বাঙালি খাবার</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high">
+<div>
+<p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Monthly Rate / মাসিক বেতন</p>
+<p class="text-lg font-black text-primary font-headline">৳ 8,500</p>
+</div>
+<button class="bg-primary text-white p-3 rounded-lg hover:brightness-110 transition-all shadow-sm">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0_4px_20px_rgba(20,29,31,0.03)] border border-surface-container-highest group hover:translate-y-[-4px] transition-all duration-300">
+<div class="relative rounded-lg overflow-hidden h-64 mb-5">
+<img alt="Professional Nanny" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkg-1sI1nrmh5SUnibNb3GRmqIrTvWI6l1H1ovRcTbsFQinC2V9SWt2B2EI32PisFmhRU4ww-AJCzGl_G70CN3jDlQTGlSk3b3xb0EsQC_1Cv3Ue5IRKPcGN2j8G8pI-p9qxE71G0xyxE2dZugjIItahKe7XoTi0ztdbKqOwwQ_l_GbVMKIjpgZskdFN9mjUpWiKICYtGEGcwxTW59ERuf5gkyDTI9XkPePfrmdmuuMiTLorCcMfjd8TLIT4kI1s8Ld3r_aWEpx6Qh"/>
+<div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[9px] font-extrabold text-primary tracking-widest uppercase">NID Verified / এনআইডি ভেরিফাইড</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Shabana Begum</h3>
+<div class="flex items-center gap-1 text-slate-500 text-xs mt-0.5">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                Gulshan 2, Dhaka / গুলশান ২, ঢাকা
+                            </div>
+</div>
+<div class="flex items-center gap-1 bg-secondary-container/20 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-secondary font-bold text-xs">4.8</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Housekeeping / গৃহকর্মী</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Laundry / ধোয়ামোছা</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high">
+<div>
+<p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Monthly Rate / মাসিক বেতন</p>
+<p class="text-lg font-black text-primary font-headline">৳ 7,200</p>
+</div>
+<button class="bg-primary text-white p-3 rounded-lg hover:brightness-110 transition-all shadow-sm">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0_4px_20px_rgba(20,29,31,0.03)] border border-surface-container-highest group hover:translate-y-[-4px] transition-all duration-300">
+<div class="relative rounded-lg overflow-hidden h-64 mb-5">
+<img alt="Executive Chef" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0LMxMhO7uREFaBnuezPwOUhGGSEZv7puqMWfhNAeRFDorB5GGwCtqZ-6ceRbRT388Nt_BV7nskOSmnliZG3vUPJ7h-SchsvmhLZOSeWE7fL5o_gB5uX8W8OpyLqo1NevMamJRFigraLGTh4mfzXyMih25jiwi5jpGIkLui84kn71LqPawCZ5E4AiT2RljHimiv05Zg17tsyaNz_4HVpSztI24piuCX7qCjAPNfLBfbvguOHI5hWfhoNAD0DSXxyeoV_TGC1WeM3wI"/>
+<div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[9px] font-extrabold text-primary tracking-widest uppercase">NID Verified / এনআইডি ভেরিফাইড</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Md. Jahangir</h3>
+<div class="flex items-center gap-1 text-slate-500 text-xs mt-0.5">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                Baridhara, Dhaka / বারিধারা, ঢাকা
+                            </div>
+</div>
+<div class="flex items-center gap-1 bg-secondary-container/20 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-secondary font-bold text-xs">5.0</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Executive Chef / প্রধান বাবুর্চি</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-lg text-[10px] font-bold text-primary uppercase tracking-tight">Continental / কন্টিনেন্টাল</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high">
+<div>
+<p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Monthly Rate / মাসিক বেতন</p>
+<p class="text-lg font-black text-primary font-headline">৳ 12,000</p>
+</div>
+<button class="bg-primary text-white p-3 rounded-lg hover:brightness-110 transition-all shadow-sm">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Stats / Tonal Shift Section -->
+<section class="mt-20 p-12 bg-secondary-container/10 rounded-lg flex flex-col md:flex-row justify-between items-center gap-8 border border-secondary-container/20">
+<div class="text-center md:text-left">
+<h4 class="font-headline text-2xl font-bold text-primary">Need a custom plan? / কাস্টম প্ল্যান প্রয়োজন?</h4>
+<p class="text-slate-600 max-w-md mt-2">Our subscription models are designed to give you peace of mind with 100% replacement guarantee. / আমাদের ১০০% রিপ্লেসমেন্ট গ্যারান্টি আপনার নিশ্চয়তা নিশ্চিত করে।</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-sm shadow-sm hover:shadow-md transition-shadow border border-surface-container-highest">Compare Plans / প্ল্যান তুলনা করুন</button>
+<button class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm hover:brightness-110 transition-all shadow-md">Contact Support / সহায়তা নিন</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(20,29,31,0.06)] border-t border-surface-container-high">
+<a class="flex flex-col items-center justify-center bg-primary text-white rounded-lg px-6 py-2 transition-transform duration-150 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[9px] font-body font-bold">Home / হোম</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="text-[9px] font-body font-bold">Tasks / কাজ</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-[9px] font-body font-bold">Wallet / ওয়ালেট</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="text-[9px] font-body font-bold">Support / সহায়তা</span>
+</a>
+</div>
+</body></html>

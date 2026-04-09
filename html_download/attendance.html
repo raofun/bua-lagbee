@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bua Lagbe - Attendance &amp; Task Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#9becf7",
+                        "outline": "#6f797a",
+                        "surface-variant": "#e1e3e4",
+                        "surface-dim": "#d8dadb",
+                        "surface-container-low": "#f2f4f5",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "secondary": "#236863",
+                        "inverse-primary": "#82d3de",
+                        "on-surface": "#191c1d",
+                        "background": "#f8fafa",
+                        "surface-container": "#eceeef",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "inverse-on-surface": "#eff1f2",
+                        "surface-bright": "#f8fafa",
+                        "on-secondary-fixed": "#00201e",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffd8b2",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8fafa",
+                        "secondary-fixed": "#acefe7",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "surface-tint": "#006972",
+                        "on-surface-variant": "#3e494a",
+                        "tertiary-container": "#8e5500",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#a9ece5",
+                        "tertiary-fixed": "#ffdcbc",
+                        "inverse-surface": "#2e3132",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#9ff0fb",
+                        "on-primary-fixed-variant": "#004f56",
+                        "on-secondary-container": "#286d67",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001f23",
+                        "error": "#ba1a1a",
+                        "primary": "#00535b",
+                        "surface-container-high": "#e6e8e9",
+                        "outline-variant": "#bec8ca",
+                        "tertiary": "#6d4000",
+                        "primary-fixed-dim": "#82d3de",
+                        "primary-container": "#006d77"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "8px",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(248, 250, 250, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f8fafa]/60 dark:bg-[#191c1d]/60 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-3 max-w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-[#006D77] dark:text-[#80d4e1] font-headline">Bua Lagbe</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#191c1d]/70 dark:text-[#f8fafa]/70 font-medium text-sm antialiased hover:text-[#006D77] transition-colors" href="#">
+                        Dashboard / ড্যাশবোর্ড
+                    </a>
+<a class="text-[#191c1d]/70 dark:text-[#f8fafa]/70 font-medium text-sm antialiased hover:text-[#006D77] transition-colors" href="#">
+                        Marketplace / বাজার
+                    </a>
+<a class="text-[#191c1d]/70 dark:text-[#f8fafa]/70 font-medium text-sm antialiased hover:text-[#006D77] transition-colors" href="#">
+                        Wallet / ওয়ালেট
+                    </a>
+<a class="text-[#006D77] font-bold border-b-2 border-[#006D77] pb-1 text-sm antialiased" href="#">
+                        Attendance / হাজিরা
+                    </a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">translate</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User Profile" data-alt="professional headshot of a smiling woman in a business casual environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1GvdPpMNAorKgDoTedjRwT_oOMSwYW6PGINCDEURh1EqY35SKGfrH61jj2Ah9LFYh5TNQ4FB51DJJLep_wpvidWbbKSOuwNoHTov2Viwqs2lIGDd3xPD8-dlQnBxYsVm-gNE1dYIUod8D7TVrQXqxv_nmmhycy-YUa-5LiIm9YuJWwJokZW0FTl2rd4RD-XC5UZGwL16paDHnOT8CpysrKHSP2doCG4fQKGK2PXOhsOG-4GOE_QjMUOyqXpzS14LZV-UtsrUJ8xZJ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Attendance & Map -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Check-in/Out Interface -->
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_40px_rgba(25,28,29,0.06)]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="text-2xl font-bold font-headline text-on-surface mb-1">Entry Status / উপস্থিতির অবস্থা</h2>
+<p class="text-sm text-on-surface-variant">Today / আজ: Oct 24, 2023</p>
+</div>
+<div class="flex items-center gap-2 bg-secondary-container px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-sm text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="text-[10px] font-bold text-on-secondary-container">Geo-fencing: Inside Zone / জোনের ভিতরে</span>
+</div>
+</div>
+<div class="relative h-48 w-full rounded-xl overflow-hidden mb-8 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="high contrast aerial view of a clean city map grid with a glowing green location pin in the center" data-location="Dhaka" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDykJu4ewI4xkX55kCu6mXecqdoZzyVGod3QJ5r6IG_XxriLEAgCDmAVC7DZhjtOx2wp22_ZLjsFK_mDojaqVXuSEczQbLwE75Dlq1oMq3TlGtx_4YtrYp8GY29QfPlyWFffJ9PJ_wL6BoJYVmexH6BrmXittoHSps3rbWnw-HGJ5yi80yhbj91CuR2LFS62aEPdLdbm8ska1qYGNHjJ5TVmHbTDyS2gQW9j1h4elHJnX0Eq5tLiSu3ZZ_sYZLmXKDvA3ooZcb2qPAZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
+<p class="text-white text-xs font-medium">Home Location / বাসার অবস্থান: Banani, Block D</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center p-6 bg-primary text-on-primary rounded-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined text-4xl mb-2">login</span>
+<span class="font-bold text-sm text-center">Check In / প্রবেশ</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container-highest text-on-surface-variant rounded-xl opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-4xl mb-2">logout</span>
+<span class="font-bold text-sm text-center">Check Out / বের হওয়া</span>
+</button>
+</div>
+</section>
+<!-- Monthly Heatmap -->
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_40px_rgba(25,28,29,0.06)]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold font-headline text-on-surface">Monthly Heatmap / মাসিক চিত্র</h3>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-on-surface-variant">chevron_left</button>
+<button class="material-symbols-outlined text-on-surface-variant">chevron_right</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Days Header -->
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Mon / সোম</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Tue / মঙ্গল</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Wed / বুধ</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Thu / বৃহঃ</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Fri / শুক্র</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Sat / শনি</div>
+<div class="text-center text-[10px] font-bold text-on-surface-variant/60 uppercase">Sun / রবি</div>
+<!-- Heatmap Tiles -->
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">1</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">2</div>
+<div class="aspect-square bg-tertiary-container rounded-sm flex items-center justify-center text-[10px] text-white">3</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">4</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">5</div>
+<div class="aspect-square bg-surface-container rounded-sm flex items-center justify-center text-[10px]">6</div>
+<div class="aspect-square bg-surface-container rounded-sm flex items-center justify-center text-[10px]">7</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">8</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">9</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">10</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">11</div>
+<div class="aspect-square bg-primary rounded-sm flex items-center justify-center text-[10px] text-white">12</div>
+<div class="aspect-square bg-surface-container rounded-sm flex items-center justify-center text-[10px]">13</div>
+<div class="aspect-square bg-surface-container rounded-sm flex items-center justify-center text-[10px]">14</div>
+<div class="aspect-square bg-primary-fixed border border-primary/20 rounded-sm flex items-center justify-center text-[10px] font-bold">24</div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+<div class="aspect-square bg-surface-container-low rounded-sm"></div>
+</div>
+<div class="mt-6 flex flex-wrap gap-4 pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5">
+<div class="w-3 h-3 bg-primary rounded-sm"></div>
+<span class="text-[10px] text-on-surface-variant">Present / উপস্থিত</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-3 h-3 bg-tertiary-container rounded-sm"></div>
+<span class="text-[10px] text-on-surface-variant">On-Leave / ছুটিতে</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-3 h-3 bg-error-container rounded-sm"></div>
+<span class="text-[10px] text-on-surface-variant">Absent / অনুপস্থিত</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Daily Tasks -->
+<div class="lg:col-span-7">
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_40px_rgba(25,28,29,0.06)] h-full">
+<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-10">
+<div>
+<span class="text-xs font-bold text-primary tracking-widest uppercase mb-2 block">Daily Checklist / দৈনিক তালিকা</span>
+<h2 class="text-3xl font-extrabold font-headline text-on-surface">Task Tracker / কাজের তালিকা</h2>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-primary">65%</p>
+<div class="w-32 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="w-[65%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Task Item -->
+<div class="group flex items-center gap-4 p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded border-primary text-primary focus:ring-primary-fixed cursor-pointer transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface flex items-center gap-2">
+                                    Kitchen Cleaning / রান্নাঘর পরিষ্কার করা <span class="material-symbols-outlined text-primary text-sm">restaurant</span>
+</p>
+<p class="text-sm text-on-surface-variant font-medium">Daily deep clean / প্রতিদিনের গভীর পরিচ্ছন্নতা</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-3 py-1 rounded-full whitespace-nowrap">09:00 AM</span>
+</div>
+<!-- Task Item -->
+<div class="group flex items-center gap-4 p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded border-primary text-primary focus:ring-primary-fixed cursor-pointer transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface flex items-center gap-2">
+                                    Laundry &amp; Ironing / কাপড় ধোয়া ও ইস্ত্রি করা <span class="material-symbols-outlined text-primary text-sm">dry_cleaning</span>
+</p>
+<p class="text-sm text-on-surface-variant font-medium">Wash and fold / ধুয়ে ভাঁজ করা</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-3 py-1 rounded-full whitespace-nowrap">10:30 AM</span>
+</div>
+<!-- Task Item -->
+<div class="group flex items-center gap-4 p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary-fixed cursor-pointer transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface flex items-center gap-2">
+                                    Grocery Shopping / বাজার করা <span class="material-symbols-outlined text-primary text-sm">shopping_basket</span>
+</p>
+<p class="text-sm text-on-surface-variant font-medium">Weekly essentials / সাপ্তাহিক প্রয়োজনীয় জিনিস</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-3 py-1 rounded-full whitespace-nowrap">12:00 PM</span>
+</div>
+<!-- Task Item -->
+<div class="group flex items-center gap-4 p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl border-2 border-dashed border-primary-container/30">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary-fixed cursor-pointer transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface flex items-center gap-2">
+                                    Pet Walk / পোষা প্রাণীকে হাঁটানো <span class="material-symbols-outlined text-primary text-sm">pets</span>
+</p>
+<p class="text-sm text-on-surface-variant font-medium">Extra Task / অতিরিক্ত কাজ</p>
+</div>
+<span class="text-[10px] font-bold text-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full whitespace-nowrap">Flexible / নমনীয়</span>
+</div>
+<!-- Task Item -->
+<div class="group flex items-center gap-4 p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary-fixed cursor-pointer transition-all" type="checkbox"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface flex items-center gap-2">
+                                    Dusting &amp; Mopping / ঘর মোছা ও ঝাড়ু দেওয়া <span class="material-symbols-outlined text-primary text-sm">mop</span>
+</p>
+<p class="text-sm text-on-surface-variant font-medium">Main floor area / প্রধান মেঝে এলাকা</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-3 py-1 rounded-full whitespace-nowrap">02:00 PM</span>
+</div>
+</div>
+<div class="mt-12 bg-primary-container text-on-primary-container p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-white/20 p-3 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<p class="font-bold text-sm">Daily Completion Bonus / দৈনিক বোনাস</p>
+<p class="text-[10px] opacity-90">Finish all tasks to earn ৳50 today! / সব কাজ শেষ করে আজ ৫০ টাকা জিতুন!</p>
+</div>
+</div>
+<span class="text-lg font-black">৳50.00</span>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-[#191c1d]/80 backdrop-blur-xl rounded-t-3xl shadow-[0_-8px_30px_rgba(25,28,29,0.04)]">
+<a class="flex flex-col items-center justify-center text-[#191c1d] dark:text-[#f8fafa] opacity-60 p-3" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-bold text-[8px] uppercase tracking-wider mt-1">Home / হোম</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#006D77] text-white rounded-xl p-3 mx-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-bold text-[8px] uppercase tracking-wider mt-1">Tracker / ট্র্যাকার</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#191c1d] dark:text-[#f8fafa] opacity-60 p-3" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-bold text-[8px] uppercase tracking-wider mt-1">Wallet / ওয়ালেট</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#191c1d] dark:text-[#f8fafa] opacity-60 p-3" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-bold text-[8px] uppercase tracking-wider mt-1">Profile / প্রোফাইল</span>
+</a>
+</nav>
+</body></html>

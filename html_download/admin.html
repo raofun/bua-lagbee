@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Command Center - Bua Lagbe</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#141d1f",
+                        "secondary": "#236863",
+                        "on-tertiary-container": "#ffd8b2",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f2fbfe",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "primary": "#006D77",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#141d1f",
+                        "on-secondary-container": "#286d67",
+                        "background": "#f2fbfe",
+                        "on-primary-fixed-variant": "#004f56",
+                        "surface-container-low": "#ecf5f8",
+                        "surface-tint": "#006D77",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#e9f2f5",
+                        "inverse-surface": "#293234",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#6d4000",
+                        "surface-container-highest": "#dbe4e7",
+                        "outline": "#6f797a",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-secondary-fixed": "#00201e",
+                        "primary-fixed": "#9ff0fb",
+                        "secondary-fixed": "#acefe7",
+                        "primary-container": "#006D77",
+                        "surface-dim": "#d2dcde",
+                        "tertiary-container": "#8e5500",
+                        "surface-container-high": "#e1eaed",
+                        "on-surface-variant": "#3e494a",
+                        "on-primary-container": "#9becf7",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "inverse-primary": "#82d3de",
+                        "outline-variant": "#bec8ca",
+                        "tertiary-fixed": "#ffdcbc",
+                        "surface-bright": "#f2fbfe",
+                        "surface-container": "#e6eff2",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "surface-variant": "#dbe4e7",
+                        "secondary-container": "#83C5BE",
+                        "on-primary-fixed": "#001f23",
+                        "primary-fixed-dim": "#82d3de",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "Hind Siliguri", "sans-serif"],
+                        "body": ["Inter", "Hind Siliguri", "sans-serif"],
+                        "label": ["Inter", "Hind Siliguri", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Inter', 'Hind Siliguri', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', 'Hind Siliguri', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex min-h-screen">
+<!-- SideNavBar (The Anchor) -->
+<aside class="flex flex-col h-screen w-64 left-0 sticky bg-[#ecf5f8] dark:bg-slate-950 py-6 transition-all duration-300 shadow-sm dark:shadow-none z-40">
+<div class="px-8 mb-10">
+<h1 class="text-xl font-bold text-primary tracking-tight">Admin Console <span class="block text-sm font-normal text-slate-500">অ্যাডমিন কনসোল</span></h1>
+<p class="text-[10px] text-slate-500 font-medium uppercase mt-1">Platform Control | প্ল্যাটফর্ম নিয়ন্ত্রণ</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 bg-white dark:bg-slate-800 text-primary font-semibold rounded-r-lg px-8 py-3 transition-all duration-300 border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label">Dashboard <span class="block text-[10px] font-normal">ড্যাশবোর্ড</span></span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-8 py-3 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label">User Management <span class="block text-[10px] font-normal">ব্যবহারকারী ব্যবস্থাপনা</span></span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-8 py-3 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-label">Financials <span class="block text-[10px] font-normal">আর্থিক বিবরণী</span></span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-8 py-3 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label">Verification <span class="block text-[10px] font-normal">যাচাইকরণ</span></span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-8 py-3 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label">Settings <span class="block text-[10px] font-normal">সেটিংস</span></span>
+</a>
+</nav>
+<div class="px-8 pt-6 mt-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="Imran Hossain" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDebmhJUmD2TDt-Lx4VqZCUExhRQ-cHwWV997KwmlLKG5FF6CfW8L37XDQizxT-QXHbWzHBNPS8EBc4WYhsEo_sVFZm7vSR3kpR0MhFzIlfyl-jbaFlkmXTuIwhAFP4grTXEYovMJV69_1vyDj8zbYoofw7ZWZS0c6jjK-k5CRVlUcJuBCvV9fAdrpLNhkpmor7rdcdpTvYGwHr0TsTsN5uWPQzyawwMcY1zmJMoESOtDco-BvBSB8kMgWeZOUBFkwz9i4x5ypD93kM"/>
+<div>
+<p class="text-sm font-bold text-on-background leading-tight">Imran Hossain</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest">System Admin <span class="block text-[8px] mt-0.5">সিস্টেম অ্যাডমিন</span></p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 min-w-0 overflow-auto bg-surface relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-8 py-6 bg-[#f2fbfe]/80 backdrop-blur-md sticky top-0 z-30 border-b border-outline-variant/30">
+<div>
+<h2 class="text-2xl font-black text-primary dark:text-cyan-500 tracking-tighter">Bua Lagbe <span class="text-sm font-medium ml-2 text-slate-400">বুয়া লাগবে</span></h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group hidden lg:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">search</span>
+<input class="bg-surface-container-high border-none rounded-lg pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-primary transition-all text-sm" placeholder="Search records... (রেকর্ড খুঁজুন)" type="text"/>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="bg-tertiary text-on-tertiary px-5 py-2 rounded-lg font-bold flex items-center gap-2 hover:scale-95 transition-transform duration-200 shadow-sm shadow-tertiary/20">
+<span class="material-symbols-outlined text-sm" data-icon="emergency">emergency</span>
+<span>SOS <span class="text-[10px] ml-1">জরুরী</span></span>
+</button>
+</div>
+</div>
+</header>
+<div class="px-8 pb-12 max-w-7xl mx-auto">
+<!-- Welcome Section -->
+<section class="mb-10 mt-6">
+<p class="text-primary font-bold tracking-widest uppercase text-xs mb-2">Command Center Overview <span class="block mt-1 font-medium lowercase">কমান্ড সেন্টার ওভারভিউ</span></p>
+<h3 class="text-4xl md:text-5xl font-black text-on-background tracking-tighter mb-4">Operational Pulse. <span class="block text-2xl md:text-3xl text-slate-400 font-bold mt-1">অপারেশনাল পালস</span></h3>
+<div class="h-1.5 w-24 bg-primary-container rounded-full"></div>
+</section>
+<!-- High-Level Metric Cards (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Total Active Contracts -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-[0_8px_24px_rgba(0,109,119,0.06)] border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="history_edu" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<span class="text-secondary font-bold text-xs bg-secondary-container/30 px-2 py-1 rounded-full">+12.5%</span>
+</div>
+<h4 class="text-slate-500 font-label text-sm mb-1">Total Active Contracts <span class="block text-[10px]">মোট সক্রিয় চুক্তি</span></h4>
+<p class="text-4xl font-black text-on-background">1,842</p>
+<!-- Mini Chart Visualization -->
+<div class="mt-6 flex items-end gap-1.5 h-12">
+<div class="bg-secondary/10 w-full h-[40%] rounded-t-[2px]"></div>
+<div class="bg-secondary/10 w-full h-[60%] rounded-t-[2px]"></div>
+<div class="bg-secondary/10 w-full h-[55%] rounded-t-[2px]"></div>
+<div class="bg-secondary/10 w-full h-[80%] rounded-t-[2px]"></div>
+<div class="bg-secondary/10 w-full h-[70%] rounded-t-[2px]"></div>
+<div class="bg-secondary/10 w-full h-[90%] rounded-t-[2px]"></div>
+<div class="bg-secondary w-full h-[100%] rounded-t-[2px]"></div>
+</div>
+</div>
+</div>
+<!-- Pending NID Verifications -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-[0_8px_24px_rgba(0,109,119,0.06)] border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/10 text-primary rounded-lg">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+</div>
+<span class="text-primary font-bold text-xs bg-primary-container/10 px-2 py-1 rounded-full">High Priority <span class="block text-[8px] font-normal">উচ্চ অগ্রাধিকার</span></span>
+</div>
+<h4 class="text-slate-500 font-label text-sm mb-1">Pending Verifications <span class="block text-[10px]">অপেক্ষমান যাচাইকরণ</span></h4>
+<p class="text-4xl font-black text-on-background">158</p>
+<!-- Mini Pulse Visualization -->
+<div class="mt-6">
+<div class="flex justify-between items-center mb-1 text-[10px] font-bold text-slate-500 uppercase">
+<span>65% Processed</span>
+<span>৬৫% সম্পন্ন</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Flagged Disputes -->
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-[0_8px_24px_rgba(0,109,119,0.06)] border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-error-container text-error rounded-lg">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+</div>
+<span class="text-error font-bold text-xs bg-error-container/50 px-2 py-1 rounded-full">Requires Action <span class="block text-[8px] font-normal">পদক্ষেপ প্রয়োজন</span></span>
+</div>
+<h4 class="text-slate-500 font-label text-sm mb-1">Flagged Disputes <span class="block text-[10px]">চিহ্নিত বিরোধ</span></h4>
+<p class="text-4xl font-black text-on-background">24</p>
+<p class="text-xs text-slate-400 mt-2">6 new flags in the last 24 hours <span class="block mt-0.5 font-medium">গত ২৪ ঘন্টায় ৬টি নতুন বিরোধ</span></p>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Platform Growth Data Viz -->
+<div class="lg:col-span-8 bg-surface-container-low p-8 rounded-lg border border-outline-variant/10">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="text-xl font-bold text-on-background">Platform Revenue Growth <span class="block text-sm font-medium text-slate-500">প্ল্যাটফর্ম আয় বৃদ্ধি</span></h4>
+<p class="text-xs text-slate-400 mt-1 uppercase font-bold tracking-wider">Monthly transactional volume and fees | মাসিক লেনদেনের পরিমাণ ও ফি</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 text-xs font-bold bg-white text-primary rounded-lg shadow-sm border border-outline-variant/30">Monthly <span class="text-[8px] opacity-60">মাসিক</span></button>
+<button class="px-4 py-1.5 text-xs font-bold text-slate-500 rounded-lg hover:bg-slate-100">Quarterly <span class="text-[8px] opacity-60">ত্রৈমাসিক</span></button>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-4 relative">
+<!-- Chart Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10 py-2">
+<div class="border-t border-slate-600 w-full"></div>
+<div class="border-t border-slate-600 w-full"></div>
+<div class="border-t border-slate-600 w-full"></div>
+<div class="border-t border-slate-600 w-full"></div>
+</div>
+<!-- Large Data Bars -->
+<div class="relative w-full h-full flex items-end justify-between gap-4">
+<div class="group relative flex-1 h-[40%] bg-primary/10 rounded-t-lg hover:bg-primary/30 transition-all">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] px-3 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap shadow-xl">৳420k (৪২০ হাজার)</div>
+</div>
+<div class="group relative flex-1 h-[55%] bg-primary/10 rounded-t-lg hover:bg-primary/30 transition-all">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] px-3 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap shadow-xl">৳580k (৫৮০ হাজার)</div>
+</div>
+<div class="group relative flex-1 h-[45%] bg-primary/10 rounded-t-lg hover:bg-primary/30 transition-all"></div>
+<div class="group relative flex-1 h-[70%] bg-primary/10 rounded-t-lg hover:bg-primary/30 transition-all"></div>
+<div class="group relative flex-1 h-[85%] bg-primary rounded-t-lg shadow-lg shadow-primary/20">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg">৳890k (৮৯০ হাজার)</div>
+</div>
+<div class="group relative flex-1 h-[65%] bg-primary/10 rounded-t-lg hover:bg-primary/30 transition-all"></div>
+<div class="group relative flex-1 h-[95%] bg-secondary rounded-t-lg shadow-lg shadow-secondary/20"></div>
+</div>
+</div>
+<div class="flex justify-between mt-6 px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<div class="text-center">JAN<br/><span class="font-medium lowercase">জানু</span></div>
+<div class="text-center">FEB<br/><span class="font-medium lowercase">ফেব্রু</span></div>
+<div class="text-center">MAR<br/><span class="font-medium lowercase">মার্চ</span></div>
+<div class="text-center">APR<br/><span class="font-medium lowercase">এপ্রিল</span></div>
+<div class="text-center">MAY<br/><span class="font-medium lowercase">মে</span></div>
+<div class="text-center">JUN<br/><span class="font-medium lowercase">জুন</span></div>
+<div class="text-center">JUL<br/><span class="font-medium lowercase">জুলাই</span></div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="lg:col-span-4 space-y-6">
+<div class="flex items-center justify-between">
+<h4 class="text-xl font-bold text-on-background">Live Feed <span class="block text-xs font-medium text-slate-500">লাইভ ফিড</span></h4>
+<span class="inline-block w-2.5 h-2.5 bg-error rounded-full animate-pulse"></span>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4 transition-all hover:-translate-y-1 border border-outline-variant/10 shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary-container/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="verified">verified</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background leading-tight">NID Verified: Rahat Khan</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold mt-1">জাতীয় পরিচয়পত্র যাচাই করা হয়েছে: রাহাত খান</p>
+<p class="text-[10px] text-slate-400 mt-0.5">3 minutes ago • ৩ মিনিট আগে</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4 transition-all hover:-translate-y-1 border border-outline-variant/10 shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background leading-tight">Payout Released: ৳12,400</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold mt-1">অর্থ প্রদান সম্পন্ন: ৳১২,৪০০</p>
+<p class="text-[10px] text-slate-400 mt-0.5">12 minutes ago • ১২ মিনিট আগে</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4 transition-all hover:-translate-y-1 border border-outline-variant/10 shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="flag">flag</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background leading-tight">Dispute Raised: S. Ahmed</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold mt-1">বিরোধ উত্থাপন করা হয়েছে: এস. আহমেদ</p>
+<p class="text-[10px] text-slate-400 mt-0.5">45 minutes ago • ৪৫ মিনিট আগে</p>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4 transition-all hover:-translate-y-1 border border-outline-variant/10 shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500 text-xl" data-icon="person_add">person_add</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background leading-tight">New Registration: Banani</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold mt-1">নতুন নিবন্ধন: বনানী জেলা</p>
+<p class="text-[10px] text-slate-400 mt-0.5">1 hour ago • ১ ঘণ্টা আগে</p>
+</div>
+</div>
+</div>
+<button class="w-full py-3 text-xs font-bold text-primary border-2 border-primary/20 rounded-lg hover:bg-primary/5 transition-colors uppercase tracking-widest">
+                        View Historical Logs <span class="block mt-0.5 font-medium lowercase">পুরানো লগ দেখুন</span>
+</button>
+</div>
+</div>
+<!-- Featured Admin Tools Section -->
+<section class="mt-12">
+<h4 class="text-2xl font-black text-on-background mb-6">Quick Actions <span class="text-sm font-bold ml-2 text-slate-400 uppercase tracking-tighter">তাত্ক্ষণিক পদক্ষেপ</span></h4>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-primary text-on-primary p-6 rounded-lg hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined mb-4 block" data-icon="add_moderator" style="font-variation-settings: 'FILL' 1;">add_moderator</span>
+<p class="font-bold leading-tight">Audit Helper Profiles</p>
+<p class="text-[10px] opacity-80 mt-1 uppercase">হেল্পার প্রোফাইল অডিট করুন</p>
+</div>
+<div class="bg-secondary text-on-secondary p-6 rounded-lg hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined mb-4 block" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<p class="font-bold leading-tight">Release Bulk Payouts</p>
+<p class="text-[10px] opacity-80 mt-1 uppercase">একসাথে পেমেন্ট রিলিজ করুন</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/30 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shadow-sm">
+<span class="material-symbols-outlined mb-4 block text-primary" data-icon="analytics">analytics</span>
+<p class="font-bold leading-tight text-on-background">Generate Reports</p>
+<p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">রিপোর্ট তৈরি করুন</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/30 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer shadow-sm">
+<span class="material-symbols-outlined mb-4 block text-primary" data-icon="support_agent">support_agent</span>
+<p class="font-bold leading-tight text-on-background">Internal Support</p>
+<p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">অভ্যন্তরীণ সহায়তা</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 opacity-30 pointer-events-none">
+<svg fill="none" height="800" viewbox="0 0 600 600" width="800" xmlns="http://www.w3.org/2000/svg">
+<circle cx="400" cy="200" fill="url(#paint0_linear)" r="250"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="400" x2="400" y1="0" y2="400">
+<stop stop-color="#83C5BE"></stop>
+<stop offset="1" stop-color="#f2fbfe" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</body></html>
