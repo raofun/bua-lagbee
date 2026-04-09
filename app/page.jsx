@@ -317,19 +317,24 @@ export default function MarketplaceDiscovery() {
                     </div>
                 </section>
 
-                {/* Bottom Stats / Tonal Shift Section */}
-                <section className="mt-20 p-12 bg-secondary-container/10 rounded-lg flex flex-col md:flex-row justify-between items-center gap-8 border border-secondary-container/20">
-                    <div className="text-center md:text-left">
-                        <h4 className="font-headline text-2xl font-bold text-primary">Need a custom plan? / কাস্টম প্ল্যান প্রয়োজন?</h4>
-                        <p className="text-slate-600 max-w-md mt-2">
-                            Our subscription models are designed to give you peace of mind with 100% replacement guarantee. / আমাদের ১০০% রিপ্লেসমেন্ট গ্যারান্টি আপনার নিশ্চয়তা নিশ্চিত করে।
+                {/* Bottom Stats / Support Section */}
+                <section className="mt-20 p-12 bg-primary/5 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-8 border border-primary/10 relative overflow-hidden">
+                    {/* Gradient background decoration */}
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+                    
+                    <div className="text-center md:text-left relative z-10">
+                        <h4 className="font-headline text-2xl md:text-3xl font-bold text-primary">Need assistance? / সহায়তা প্রয়োজন?</h4>
+                        <p className="text-slate-600 max-w-lg mt-3 text-base">
+                            Our dedicated support team is here to help you find the perfect curator and answer any questions about our services. / আমাদের সাপোর্ট টিম আপনার জন্য সেরা কর্মী খুঁজে দিতে এবং যেকোনো প্রশ্নের উত্তর দিতে প্রস্তুত।
                         </p>
                     </div>
-                    <div className="flex gap-4">
-                        <button className="bg-white text-primary px-8 py-4 rounded-lg font-bold text-sm shadow-sm hover:shadow-md transition-shadow border border-surface-container-highest">
-                            Compare Plans / প্ল্যান তুলনা করুন
+                    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto relative z-10">
+                        <button className="bg-white text-primary px-8 py-4 rounded-xl font-bold text-sm shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-lg transition-all border border-surface-container-highest flex items-center justify-center gap-2">
+                            <span className="material-symbols-outlined text-sm">chat_bubble</span>
+                            Live Chat / লাইভ চ্যাট
                         </button>
-                        <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm hover:brightness-110 transition-all shadow-md">
+                        <button className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-sm hover:brightness-110 active:scale-95 transition-all shadow-[0_8px_20px_rgba(var(--primary-rgb),0.3)] flex items-center justify-center gap-2">
+                            <span className="material-symbols-outlined text-sm">call</span>
                             Contact Support / সহায়তা নিন
                         </button>
                     </div>
