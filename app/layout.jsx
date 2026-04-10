@@ -15,7 +15,7 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-    title: "Bua Lagbe Service UI",
+    title: "Bua Lagbe",
     description: "The Digital Concierge for premium domestic services.",
 };
 
