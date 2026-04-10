@@ -3,7 +3,7 @@ export default function Support() {
     <>
 
       <main className="pt-28 pb-32 px-6 max-w-6xl mx-auto">
-        {/* Hero Section */}
+        {}
         <section className="mb-14">
           <h1 className="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-3">
             Safety &amp; Support Center
@@ -15,10 +15,10 @@ export default function Support() {
           </p>
         </section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Main SOS Column */}
+          {}
           <div className="lg:col-span-8 space-y-8">
             <div className="bg-white dark:bg-slate-900 p-10 md:p-14 rounded-[40px] shadow-2xl border-4 border-red-500/20 relative overflow-hidden group">
-              {/* Emergency Pulse Background */}
+              {}
               <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
 
               <div className="relative z-10 flex flex-col md:flex-row gap-10 items-start">
@@ -39,7 +39,7 @@ export default function Support() {
                     <span className="text-sm block mt-2 opacity-80 italic">যেকোনো জরুরি পরিস্থিতিতে আমাদের টিম সরাসরি সহায়তা প্রদান করবে।</span>
                   </p>
                   
-                  {/* Enhanced SOS Slider */}
+                  {}
                   <div className="relative w-full max-w-lg h-24 bg-slate-100 dark:bg-slate-800 rounded-[30px] p-2 overflow-hidden border-2 border-slate-200 dark:border-slate-700 select-none">
                     <div className="absolute inset-0 flex items-center justify-center select-none">
                       <span className="text-sm font-black text-slate-400 uppercase tracking-[0.3em] pointer-events-none animate-pulse select-none">
@@ -53,7 +53,7 @@ export default function Support() {
                 </div>
               </div>
 
-              {/* Emergency Quick Dials */}
+              {}
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a 
                   href="tel:999"
@@ -93,7 +93,7 @@ export default function Support() {
             </div>
           </div>
 
-          {/* Side Info Column */}
+          {}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-primary/10 dark:bg-primary/5 p-8 rounded-[32px] border-2 border-primary/20 flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white mb-6 shadow-xl shadow-primary/20">
@@ -132,11 +132,11 @@ export default function Support() {
             </div>
           </div>
         </div>
-        {/* Contact Support Cards */}
+        {}
         <section className="mt-16">
           <h2 className="font-headline font-extrabold text-2xl mb-8 text-[#191c1d]">Direct Assistance (সরাসরি সহায়তা)</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Chat Support */}
+            {}
             <div className="bg-white dark:bg-slate-900 p-10 rounded-[40px] shadow-xl border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 transition-all cursor-pointer">
               <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-8 shadow-sm">
                 <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -151,7 +151,7 @@ export default function Support() {
                 <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </div>
             </div>
-            {/* Call Support */}
+            {}
             <div className="bg-white dark:bg-slate-900 p-10 rounded-[40px] shadow-xl border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 transition-all cursor-pointer">
               <div className="w-16 h-16 bg-cyan-500/10 text-cyan-600 rounded-2xl flex items-center justify-center mb-8 shadow-sm">
                 <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -166,7 +166,7 @@ export default function Support() {
                 <span className="material-symbols-outlined text-[18px]">content_copy</span>
               </div>
             </div>
-            {/* Dispute Center */}
+            {}
             <div className="bg-white dark:bg-slate-900 p-10 rounded-[40px] shadow-xl border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 transition-all cursor-pointer">
               <div className="w-16 h-16 bg-orange-500/10 text-orange-600 rounded-2xl flex items-center justify-center mb-8 shadow-sm">
                 <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -185,7 +185,7 @@ export default function Support() {
         </section>
       </main>
 
-      {/* Floating Help */}
+      {}
       <div className="fixed bottom-24 right-6 md:bottom-10 md:right-10 z-40">
         <button className="w-14 h-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center active:scale-90 transition-all">
           <span className="material-symbols-outlined">help</span>

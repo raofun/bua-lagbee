@@ -4,7 +4,7 @@ export default function Wallet() {
 
       <main className="max-w-7xl mx-auto px-6 py-8 md:py-12 flex-grow overflow-x-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Sidebar Navigation (Web) */}
+          {}
           <aside className="hidden lg:flex lg:col-span-3 flex-col gap-2 h-fit">
             <div className="mb-8 px-4">
               <h2 className="font-headline text-xl font-bold text-primary">Admin Console / অ্যাডমিন কনসোল</h2>
@@ -48,9 +48,9 @@ export default function Wallet() {
               </a>
             </nav>
           </aside>
-          {/* Main Content Area */}
+          {}
           <div className="lg:col-span-9 space-y-8">
-            {/* Hero Section: Escrow Balance */}
+            {}
             <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#006D77] to-[#004f56] p-8 md:p-12 text-white">
               <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
                 <div>
@@ -91,12 +91,12 @@ export default function Wallet() {
                   </div>
                 </div>
               </div>
-              {/* Decorative Element */}
+              {}
               <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
             </section>
-            {/* Financial Breakdown: Bento Grid */}
+            {}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Base Salary */}
+              {}
               <div className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low">
                 <div className="flex justify-between items-start mb-4">
                   <span className="material-symbols-outlined text-secondary bg-secondary-container/30 p-2 rounded-lg">
@@ -109,7 +109,7 @@ export default function Wallet() {
                 <p className="text-slate-500 font-medium text-xs mb-1">Base Salary / মূল বেতন</p>
                 <h3 className="font-headline text-2xl font-bold text-primary">৳ 15,000.00</h3>
               </div>
-              {/* Performance Bonus */}
+              {}
               <div className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low border-l-4 border-green-500">
                 <div className="flex justify-between items-start mb-4">
                   <span className="material-symbols-outlined text-green-600 bg-green-100 p-2 rounded-lg">
@@ -122,7 +122,7 @@ export default function Wallet() {
                 <p className="text-slate-500 font-medium text-xs mb-1">Performance Bonus / পারফরম্যান্স বোনাস</p>
                 <h3 className="font-headline text-2xl font-bold text-green-600">+ ৳ 4,200.00</h3>
               </div>
-              {/* Deductions */}
+              {}
               <div className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-surface-container-low border-l-4 border-red-500">
                 <div className="flex justify-between items-start mb-4">
                   <span className="material-symbols-outlined text-red-600 bg-red-100 p-2 rounded-lg">
@@ -136,9 +136,9 @@ export default function Wallet() {
                 <h3 className="font-headline text-2xl font-bold text-red-600">- ৳ 700.00</h3>
               </div>
             </section>
-            {/* Transparency Section & Invoices */}
+            {}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Security Statement */}
+              {}
               <div className="bg-surface-container-high rounded-2xl p-8 flex flex-col justify-center border border-surface-container-highest">
                 <div className="max-w-sm">
                   <h2 className="font-headline text-2xl font-extrabold text-primary mb-4">
@@ -164,7 +164,7 @@ export default function Wallet() {
                   </div>
                 </div>
               </div>
-              {/* Recent Invoices */}
+              {}
               <div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-surface-container-low">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="font-headline text-xl font-bold text-on-surface">Recent Invoices / সাম্প্রতিক ইনভয়েস</h2>
@@ -173,7 +173,7 @@ export default function Wallet() {
                   </button>
                 </div>
                 <div className="space-y-3">
-                  {/* Invoice Item */}
+                  {}
                   <div className="flex items-center justify-between p-4 bg-[#f8fafa] rounded-lg group hover:bg-[#e6e8e9] transition-all border border-transparent hover:border-primary/10">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
@@ -193,7 +193,7 @@ export default function Wallet() {
                       </span>
                     </div>
                   </div>
-                  {/* Invoice Item */}
+                  {}
                   <div className="flex items-center justify-between p-4 bg-[#f8fafa] rounded-lg group hover:bg-[#e6e8e9] transition-all border border-transparent hover:border-primary/10">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
@@ -213,7 +213,7 @@ export default function Wallet() {
                       </span>
                     </div>
                   </div>
-                  {/* Invoice Item */}
+                  {}
                   <div className="flex items-center justify-between p-4 bg-[#f8fafa] rounded-lg group hover:bg-[#e6e8e9] transition-all border border-transparent hover:border-primary/10">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">

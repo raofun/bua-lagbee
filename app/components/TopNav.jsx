@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { isAuthenticated } from "@/lib/auth";
 
 export default function TopNav() {
   const pathname = usePathname();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   
-  // Example Notifications State
+  
   const [notifications, setNotifications] = useState([
     { id: 1, title: 'Helper confirmed', desc: 'Rahima Begum has accepted your booking.', time: '2 mins ago', isRead: false },
     { id: 2, title: 'Wallet Top-up Successful', desc: '৳500 added to your balance.', time: '1 hour ago', isRead: true },
@@ -21,18 +22,18 @@ export default function TopNav() {
     setNotifications(notifications.map(n => ({ ...n, isRead: true })));
   };
   
-  // Mock login state for UI demonstration
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState("user");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsLoggedIn(localStorage.getItem("mock_logged_in") === "true");
-      setUserRole(localStorage.getItem("mock_user_role") || "user");
+      setIsLoggedIn(isAuthenticated());
+      setUserRole(localStorage.getItem("userRole") || "user");
     }
   }, [pathname]);
   
-  if (pathname === '/admin' || pathname === '/login') return null; // Hide on Admin and Login
+  if (pathname === '/admin' || pathname === '/login') return null; 
   
   return (
     <nav className="bg-[#f2fbfe] dark:bg-slate-900 sticky top-0 z-50 transition-all duration-200 border-b border-surface-container-high">
@@ -55,12 +56,12 @@ export default function TopNav() {
 
             {isLoggedIn && userRole === "admin" && (
               <Link
-                href="/dashboard"
+                href="/admin"
                 className={`${
-                  pathname === "/dashboard" ? "text-primary dark:text-cyan-400 border-b-2 border-primary py-1" : "text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
-                } font-bold font-body text-xs tracking-tight`}
+                  pathname.startsWith("/admin") ? "text-primary dark:text-cyan-400 border-b-2 border-primary py-1" : "text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                } font-black font-body text-[10px] uppercase tracking-widest`}
               >
-                Dashboard / ড্যাশবোর্ড
+                Admin / এডমিন
               </Link>
             )}
 
@@ -105,7 +106,7 @@ export default function TopNav() {
                 )}
               </button>
               
-              {/* Notifications Popup Menu */}
+              {}
               {showNotifications && (
                 <div className="absolute right-0 mt-3 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 py-3 z-50 animate-in fade-in slide-in-from-top-2">
                   <div className="px-4 pb-2 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">

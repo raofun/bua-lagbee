@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { logout, isAuthenticated } from "@/lib/auth";
 
 export default function UserProfile() {
   const router = useRouter();
   
-  // File Upload State and Refs
+  
   const avatarInputRef = useRef(null);
   const coverInputRef = useRef(null);
   const [avatarUrl, setAvatarUrl] = useState("https://lh3.googleusercontent.com/aida-public/AB6AXuBCBOZ91jjAiMGJFiPPe2-hz0yqydE4T0nfQl3rlSaDtwcw-N5XlXXIx6ZL04ylI9ktcAiv8XJr3wDHaFUYcQZZLbHNXlJ2n-eAangaBJsNrjXRYuLxaErdBc4zMITlKW9XdagyA15Im3oftLnkf4urQiVw2s2r6BPaC6MMred6h640BNs_MWs0hu1n1m4l6ZnahDK3PWBoze8GQEFQeZ5wYvUYAZoP5X0_advJCbwpruMf_XSdncTmxIwi4Gvz_U_pMAMtZiN3AnbC");
@@ -14,48 +15,111 @@ export default function UserProfile() {
   
   const handleAvatarChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setAvatarUrl(URL.createObjectURL(e.target.files[0]));
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatarUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const handleCoverChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setCoverUrl(URL.createObjectURL(e.target.files[0]));
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCoverUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
   
-  // Form State
+  
   const [formData, setFormData] = useState({
-    firstName: "Raofun",
-    lastName: "Azad",
-    email: "raofunazad851@gmail.com",
-    phone: "017XXXXXXXX",
-    address: "House 12, Road 5, Block C, Banani, Dhaka",
-    nid: "1234567890"
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    nid: ""
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // If you try to view the profile but aren't logged in, it will still show for demo purposes
-  // but normally you would protect this route.
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!isAuthenticated()) {
+        logout(router);
+        return;
+      }
+      
+      const userId = localStorage.getItem("userId");
+      
+      try {
+        const res = await fetch(`/api/users/${userId}`);
+        const data = await res.json();
+        
+        if (data.success) {
+          const u = data.user;
+          setFormData({
+            firstName: u.firstName || u.name?.split(" ")[0] || "",
+            lastName: u.lastName || u.name?.split(" ").slice(1).join(" ") || "",
+            email: u.email || "",
+            phone: u.phone || "",
+            address: u.address || "",
+            nid: u.nid || ""
+          });
+          if (u.image) setAvatarUrl(u.image);
+          if (u.coverImage) setCoverUrl(u.coverImage);
+        }
+      } catch (err) {
+        console.error("Failed to fetch profile");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProfile();
+  }, [router]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Mimic API delay
-    setTimeout(() => {
+    
+    const userId = localStorage.getItem("userId");
+    try {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData, 
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          image: avatarUrl,
+          coverImage: coverUrl
+        })
+      });
+      const data = await res.json();
+      
+      if (data.success) {
+        
+        localStorage.setItem("userName", `${formData.firstName} ${formData.lastName}`.trim());
+        alert("Profile updated successfully! / প্রোফাইল সফলভাবে আপডেট করা হয়েছে!");
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (err) {
+      alert("Network Error: Could not save profile.");
+    } finally {
       setIsLoading(false);
-      alert("Profile updated successfully! / প্রোফাইল সফলভাবে আপডেট করা হয়েছে!");
-    }, 800);
+    }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("mock_logged_in");
-    router.push("/login");
+    logout(router);
   };
 
   return (
@@ -76,7 +140,7 @@ export default function UserProfile() {
         </div>
 
         <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
-          {/* Cover Photo Area */}
+          {}
           <div 
             className={`h-32 relative ${!coverUrl ? 'bg-gradient-to-r from-primary to-secondary' : ''}`}
             style={coverUrl ? { backgroundImage: `url(${coverUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
@@ -97,7 +161,7 @@ export default function UserProfile() {
           </div>
 
           <form onSubmit={handleSave} className="p-6 md:p-10 relative">
-            {/* Avatar Upload */}
+            {}
             <div className="absolute -top-16 left-6 md:left-10">
               <input 
                 type="file" 
@@ -124,7 +188,7 @@ export default function UserProfile() {
             </div>
 
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Form Fields */}
+              {}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-500 ml-1">First Name <span className="text-[10px] font-normal">প্রথম নাম</span></label>
                 <input
@@ -214,7 +278,7 @@ export default function UserProfile() {
           </form>
         </div>
 
-        {/* Coming Soon Section */}
+        {}
         <div className="mt-8 px-6 py-8 rounded-3xl bg-primary/5 border border-primary/10 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
           <span className="material-symbols-outlined text-primary mb-2 text-[32px] opacity-80">construction</span>
           <h3 className="font-headline text-lg font-bold text-slate-800 dark:text-slate-200">More Features Coming Soon</h3>

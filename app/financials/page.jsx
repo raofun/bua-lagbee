@@ -3,64 +3,116 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { logout, isAuthenticated } from "@/lib/auth";
 
 export default function Financials() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Wallet State
-  const [balance, setBalance] = useState(18500);
+  const [balance, setBalance] = useState(0);
+  const [helpers, setHelpers] = useState([]);
+  const [helpersLoading, setHelpersLoading] = useState(true);
+  const [transactions, setTransactions] = useState([]);
   
-  // Modal states: 'none', 'release', 'tip', 'recharge'
+  
   const [activeModal, setActiveModal] = useState("none");
   const [selectedHelperId, setSelectedHelperId] = useState("");
   const [tipAmount, setTipAmount] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState("");
 
-  // Mock Helpers Data
-  const helpers = [
-    { id: "h1", name: "Rahima Begum", salary: 12000, role: "Cleaning & Cooking", avatar: "RB" },
-    { id: "h2", name: "Sumona Akter", salary: 8500, role: "Laundry", avatar: "SA" },
-    { id: "h3", name: "Abdul Khalil", salary: 15000, role: "Full-time Care", avatar: "AK" }
-  ];
-
-  // Mock logged in user details
+  
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const loggedIn = localStorage.getItem("mock_logged_in") === "true";
+      const loggedIn = isAuthenticated();
+      const userId = localStorage.getItem("userId");
       setIsLoggedIn(loggedIn);
       
-      if (loggedIn) {
-        // Load persist balance
-        const savedBalance = localStorage.getItem("wallet_balance");
-        if (savedBalance !== null) {
-          setBalance(parseFloat(savedBalance));
-        } else {
-          localStorage.setItem("wallet_balance", "18500");
-        }
+      if (loggedIn && userId) {
+        const fetchFinancialData = async () => {
+          try {
+            
+            const financialPromise = fetch(`/api/financials?userId=${userId}`)
+              .then(res => res.json())
+              .then(data => {
+                if (data.success) {
+                  setBalance(data.balance);
+                  setTransactions(data.transactions);
+                } else if (data.status === 404) {
+                  setError(data.message || "Failed to load financial data");
+                  localStorage.removeItem("mock_logged_in");
+                  localStorage.removeItem("userId");
+                  setTimeout(() => router.push("/login"), 3000);
+                } else {
+                  setError(data.message || "Failed to load financial data");
+                }
+                
+                setIsLoading(false);
+              })
+              .catch(err => {
+                console.error("Financial fetch error:", err);
+                setError("Failed to connect to financial services.");
+                setIsLoading(false);
+              });
+
+            
+            fetch("/api/helpers?excludeImage=true")
+              .then(res => res.json())
+              .then(helpersData => {
+                if (helpersData.success) {
+                  setHelpers(helpersData.data.map(h => ({
+                    id: h._id,
+                    name: h.name,
+                    salary: h.monthlyRate,
+                    role: h.category,
+                    avatar: h.name.split(' ').map(n => n[0]).join('')
+                  })));
+                }
+                setHelpersLoading(false);
+              })
+              .catch(err => {
+                console.error("Helper fetch error:", err);
+                setHelpersLoading(false);
+              });
+
+            await financialPromise;
+          } catch (error) {
+            console.error("Pre-fetch error:", error);
+            setError("Connection error. Check your database settings.");
+            setIsLoading(false);
+          }
+        };
+
+        fetchFinancialData();
 
         setUser({
-          name: "Raofun Azad",
-          baseSalary: "15,000.00",
-          bonus: "4,200.00",
-          deduction: "700.00"
+          name: localStorage.getItem("userName") || "User",
+          baseSalary: "---",
+          bonus: "---",
+          deduction: "---"
         });
+      } else {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
   }, []);
 
-  // Update localStorage when balance changes
+  
   useEffect(() => {
-    if (isLoggedIn) {
-      localStorage.setItem("wallet_balance", balance.toString());
+    if (activeModal !== "none") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
     }
-  }, [balance, isLoggedIn]);
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [activeModal]);
 
-  const handleRelease = () => {
+  const handleRelease = async () => {
     if (!selectedHelperId) {
       alert("Please select a helper first.");
       return;
@@ -75,16 +127,37 @@ export default function Financials() {
     }
 
     setProcessing(true);
-    setTimeout(() => {
-      setBalance(prev => prev - helper.salary);
+    try {
+      const userId = localStorage.getItem("userId");
+      const res = await fetch("/api/financials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          type: "Release",
+          amount: helper.salary,
+          description: `Salary release to ${helper.name}`
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setBalance(data.balance);
+        setTransactions([data.transaction, ...transactions]);
+        setActiveModal("none");
+        setSelectedHelperId("");
+        alert(`Funds of ৳${helper.salary.toLocaleString()} released successfully!`);
+      } else {
+        alert(data.message || "Failed to release funds");
+      }
+    } catch (error) {
+      alert("Transaction failed");
+    } finally {
       setProcessing(false);
-      setActiveModal("none");
-      setSelectedHelperId("");
-      alert(`Funds of ৳${helper.salary.toLocaleString()} released to ${helper.name} successfully!`);
-    }, 1500);
+    }
   };
 
-  const handleTip = () => {
+  const handleTip = async () => {
     const amount = parseFloat(tipAmount);
     if (!selectedHelperId || !amount) {
       alert("Please select a helper and enter a valid tip amount.");
@@ -99,25 +172,38 @@ export default function Financials() {
     setProcessing(true);
     const helper = helpers.find(h => h.id === selectedHelperId);
 
-    setTimeout(() => {
-      setBalance(prev => prev - amount);
+    try {
+      const userId = localStorage.getItem("userId");
+      const res = await fetch("/api/financials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          type: "Tip",
+          amount,
+          description: `Extra tip for ${helper?.name}`
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setBalance(data.balance);
+        setTransactions([data.transaction, ...transactions]);
+        setActiveModal("none");
+        setTipAmount("");
+        setSelectedHelperId("");
+        alert(`Tip of ৳${amount} sent to ${helper?.name} successfully!`);
+      } else {
+        alert(data.message || "Failed to send tip");
+      }
+    } catch (error) {
+       alert("Transaction failed");
+    } finally {
       setProcessing(false);
-      setActiveModal("none");
-      setTipAmount("");
-      setSelectedHelperId("");
-      alert(`Tip of ৳${amount} sent to ${helper?.name} successfully!`);
-    }, 1200);
+    }
   };
 
-  if (isLoading) {
-    return (
-      <main className="min-h-screen bg-surface flex justify-center items-center">
-        <span className="material-symbols-outlined animate-spin text-primary text-4xl">refresh</span>
-      </main>
-    );
-  }
-
-  if (!isLoggedIn) {
+  if (!isLoggedIn && !isLoading) {
     return (
       <main className="min-h-screen bg-surface flex flex-col justify-center items-center p-6 text-center">
         <div className="bg-white dark:bg-slate-900 p-10 rounded-3xl shadow-xl max-w-md w-full border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-4 text-on-surface">
@@ -137,6 +223,10 @@ export default function Financials() {
     );
   }
 
+  const Skeleton = ({ className }) => (
+    <div className={`animate-pulse bg-slate-200 dark:bg-slate-800 rounded ${className}`}></div>
+  );
+
   return (
     <main className="max-w-7xl mx-auto px-6 py-8 md:py-12 pb-24 md:pb-12 bg-surface min-h-screen text-on-surface">
       <div className="mb-8">
@@ -149,7 +239,21 @@ export default function Financials() {
       </div>
 
       <div className="space-y-8">
-        {/* Hero Section: Main Wallet Balance */}
+        {error && (
+            <div className="bg-red-50 dark:bg-red-950/20 text-red-600 p-4 rounded-2xl text-sm font-bold border border-red-100 dark:border-red-900/30 flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined">warning</span>
+                    <span>{error}</span>
+                </div>
+                {error.includes("log in again") && (
+                    <Link href="/login" className="bg-red-600 text-white px-4 py-1.5 rounded-lg text-xs hover:brightness-110 shadow-sm">
+                        Login Now
+                    </Link>
+                )}
+            </div>
+        )}
+
+        {}
         <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#006D77] to-[#004f56] p-8 md:p-12 text-white shadow-2xl shadow-primary/20">
           <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -158,7 +262,11 @@ export default function Financials() {
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#9ff0fb]">Total Wallet Balance / সর্বমোট ব্যালেন্স</span>
               </div>
               <div className="flex items-baseline gap-2 mb-8">
-                <span className="font-headline text-6xl font-black">৳{balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                {isLoading ? (
+                  <Skeleton className="h-16 w-64 bg-white/20" />
+                ) : (
+                  <span className="font-headline text-6xl font-black">৳{balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                )}
               </div>
               
               <div className="flex flex-wrap gap-4">
@@ -213,12 +321,12 @@ export default function Financials() {
             </div>
           </div>
           
-          {/* Decorative Background Elements */}
+          {}
           <div className="absolute -bottom-32 -right-32 w-[30rem] h-[30rem] bg-[#a9ece5]/20 rounded-full blur-[120px] mix-blend-overlay"></div>
           <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
         </section>
 
-        {/* Financial Breakdown Cards */}
+        {}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 group hover:border-primary/20 transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -248,39 +356,60 @@ export default function Financials() {
           </div>
         </section>
 
-        {/* Transaction History Mock */}
+        {}
         <div className="bg-white dark:bg-slate-900 rounded-[32px] p-8 shadow-sm border border-slate-100 dark:border-slate-800">
           <div className="flex justify-between items-center mb-8">
             <h2 className="font-headline text-2xl font-black text-slate-800 dark:text-white">Recent Transactions</h2>
             <button className="text-xs font-black uppercase tracking-[0.15em] text-primary hover:underline">View All History</button>
           </div>
           <div className="space-y-4">
-            {[
-              { id: "T1", type: "Release", name: "Rahima Begum", amt: "-৳12,000", date: "July 01", icon: "outbound" },
-              { id: "T2", type: "Recharge", name: "Bkash Top-up", amt: "+৳15,000", date: "June 28", icon: "account_balance" },
-              { id: "T3", type: "Tip", name: "Sumona Akter", amt: "-৳500", date: "June 25", icon: "stars" }
-            ].map((txn) => (
-              <div key={txn.id} className="flex items-center justify-between p-5 bg-slate-50 dark:bg-slate-800/40 rounded-[20px] transition-all hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200">
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${txn.amt.startsWith('+') ? 'bg-green-100 text-green-600' : 'bg-slate-200 text-slate-600'}`}>
-                    <span className="material-symbols-outlined text-[20px]">{txn.icon}</span>
+            {isLoading ? (
+              [1, 2, 3].map(i => (
+                <div key={i} className="flex items-center justify-between p-5 bg-slate-50 dark:bg-slate-800/40 rounded-[20px] border border-transparent">
+                  <div className="flex items-center gap-4">
+                    <Skeleton className="w-12 h-12 rounded-2xl" />
+                    <div className="space-y-2">
+                       <Skeleton className="h-4 w-40" />
+                       <Skeleton className="h-2 w-24" />
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-800 dark:text-white">{txn.name}</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{txn.type} • {txn.date}</p>
+                  <Skeleton className="h-6 w-20" />
+                </div>
+              ))
+            ) : transactions.length > 0 ? (
+              transactions.map((txn) => (
+                <div key={txn._id} className="flex items-center justify-between p-5 bg-slate-50 dark:bg-slate-800/40 rounded-[20px] transition-all hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200">
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${txn.type === 'Recharge' ? 'bg-green-100 text-green-600' : 'bg-slate-200 text-slate-600'}`}>
+                      <span className="material-symbols-outlined text-[20px]">
+                        {txn.type === 'Recharge' ? 'account_balance' : txn.type === 'Tip' ? 'stars' : 'outbound'}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800 dark:text-white">{txn.description}</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        {txn.type} • {new Date(txn.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className={`font-headline text-lg font-black ${txn.type === 'Recharge' ? 'text-green-600' : 'text-slate-800 dark:text-slate-200'}`}>
+                      {txn.type === 'Recharge' ? '+' : '-'}৳{txn.amount.toLocaleString()}
+                    </p>
+                    <p className="text-[10px] text-slate-400 font-bold">{txn.status}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className={`font-headline text-lg font-black ${txn.amt.startsWith('+') ? 'text-green-600' : 'text-slate-800 dark:text-slate-200'}`}>{txn.amt}</p>
-                  <p className="text-[10px] text-slate-400 font-bold">Successful</p>
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+               <div className="text-center py-10">
+                 <p className="text-slate-400 text-sm">No recent transactions. / কোনো লেনদেন পাওয়া যায়নি।</p>
+               </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* MODALS LAYER */}
+      {}
       {(activeModal !== "none") && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
@@ -288,11 +417,11 @@ export default function Financials() {
             onClick={() => !processing && setActiveModal("none")}
           ></div>
           
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-[32px] shadow-2xl relative z-10 overflow-hidden animate-in zoom-in-95 fade-in duration-300 border border-white/20">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] rounded-[32px] shadow-2xl relative z-10 overflow-hidden flex flex-col animate-in zoom-in-95 fade-in duration-300 border border-white/20">
             
-            {/* 1. RELEASE SALARY MODAL */}
+            {}
             {activeModal === "release" && (
-              <div className="p-10">
+              <div className="p-10 overflow-y-auto flex-1">
                 <div className="w-16 h-16 bg-primary/10 rounded-[20px] flex items-center justify-center mb-8 text-primary shadow-inner">
                   <span className="material-symbols-outlined text-[32px]">payments</span>
                 </div>
@@ -302,24 +431,35 @@ export default function Financials() {
                 </p>
 
                 <div className="space-y-3 mb-8">
-                  {helpers.map(helper => (
-                    <button 
-                      key={helper.id}
-                      onClick={() => setSelectedHelperId(helper.id)}
-                      className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all block ${selectedHelperId === helper.id ? 'border-primary bg-primary/5 ring-4 ring-primary/10' : 'border-slate-50 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100'}`}
-                    >
-                      <div className="flex items-center gap-4 text-left">
-                         <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center font-black text-primary border border-slate-200 dark:border-slate-700">
-                          {helper.avatar}
-                         </div>
-                         <div>
-                            <p className="font-black text-xs text-slate-800 dark:text-white uppercase tracking-tight">{helper.name}</p>
-                            <p className="text-[10px] text-slate-500 font-bold">{helper.role}</p>
-                         </div>
-                      </div>
-                      <p className="font-headline font-black text-primary text-sm">৳{helper.salary.toLocaleString()}</p>
-                    </button>
-                  ))}
+                  {helpersLoading ? (
+                    <div className="py-20 text-center">
+                      <span className="material-symbols-outlined animate-spin text-primary text-2xl">refresh</span>
+                      <p className="text-[10px] font-black uppercase text-slate-400 mt-2">Connecting to Ledger...</p>
+                    </div>
+                  ) : helpers.length > 0 ? (
+                    helpers.map(helper => (
+                      <button 
+                        key={helper.id}
+                        onClick={() => setSelectedHelperId(helper.id)}
+                        className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all block ${selectedHelperId === helper.id ? 'border-primary bg-primary/5 ring-4 ring-primary/10' : 'border-slate-50 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100'}`}
+                      >
+                        <div className="flex items-center gap-4 text-left">
+                          <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center font-black text-primary border border-slate-200 dark:border-slate-700">
+                            {helper.avatar}
+                          </div>
+                          <div>
+                              <p className="font-black text-xs text-slate-800 dark:text-white uppercase tracking-tight">{helper.name}</p>
+                              <p className="text-[10px] text-slate-500 font-bold">{helper.role}</p>
+                          </div>
+                        </div>
+                        <p className="font-headline font-black text-primary text-sm">৳{helper.salary.toLocaleString()}</p>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="py-10 text-center text-slate-400">
+                      <p className="text-sm font-bold">No helpers found.</p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex gap-4">
@@ -341,9 +481,9 @@ export default function Financials() {
               </div>
             )}
 
-            {/* 2. ADD TIP MODAL */}
+            {}
             {activeModal === "tip" && (
-              <div className="p-10">
+              <div className="p-10 overflow-y-auto flex-1">
                 <div className="flex justify-between items-center mb-8">
                    <div className="flex items-center gap-3">
                     <span className="material-symbols-outlined text-primary bg-primary/10 p-2.5 rounded-xl">star_rate</span>
@@ -354,10 +494,14 @@ export default function Financials() {
                   </button>
                 </div>
 
-                {/* Step 1: Select Helper */}
+                {}
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4 ml-1">1. Choose Helper</p>
                 <div className="grid grid-cols-3 gap-3 mb-8">
-                  {helpers.map(helper => (
+                  {helpersLoading ? (
+                    <div className="col-span-3 py-6 flex flex-col items-center">
+                      <span className="material-symbols-outlined animate-spin text-primary text-xl">refresh</span>
+                    </div>
+                  ) : helpers.map(helper => (
                     <button 
                       key={helper.id}
                       onClick={() => setSelectedHelperId(helper.id)}
@@ -371,7 +515,7 @@ export default function Financials() {
                   ))}
                 </div>
 
-                {/* Step 2: Select Amount */}
+                {}
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4 ml-1">2. Tip Amount</p>
                 <div className="grid grid-cols-3 gap-3 mb-6">
                   {["100", "200", "500"].map(amt => (
@@ -403,9 +547,9 @@ export default function Financials() {
               </div>
             )}
 
-            {/* 3. RECHARGE MODAL (Setup Placeholder) */}
+            {}
             {activeModal === "recharge" && (
-              <div className="p-10 text-center">
+              <div className="p-10 overflow-y-auto flex-1 text-center">
                 <div className="relative w-24 h-24 mx-auto mb-8">
                    <div className="absolute inset-0 bg-[#9ff0fb]/20 rounded-full animate-ping opacity-50"></div>
                    <div className="relative w-full h-full bg-white dark:bg-slate-900 border-4 border-primary/10 rounded-[28px] flex items-center justify-center text-primary shadow-xl">

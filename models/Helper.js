@@ -9,6 +9,10 @@ const HelperSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a location."],
   },
+  nid: {
+    type: String,
+    default: "",
+  },
   bnLocation: {
     type: String,
   },
@@ -26,8 +30,15 @@ const HelperSchema = new mongoose.Schema({
   },
   monthlyRate: {
     type: Number,
-    required: [true, "Please provide a monthly rate."],
+    default: 0
   },
+  tasks: [
+    {
+      name: String,
+      bnName: String,
+      price: Number
+    }
+  ],
   verified: {
     type: Boolean,
     default: false,
@@ -47,10 +58,31 @@ const HelperSchema = new mongoose.Schema({
     type: String,
   },
   category: {
-    type: String, // Chef, Housekeeping, Nanny, etc.
+    type: String, 
+  },
+  shift: {
+    type: String, 
+    enum: ["Morning", "Afternoon", "Evening", "Full Day"],
+    default: "Morning"
+  },
+  workingHours: {
+    type: String, 
+  },
+  workingDays: {
+    type: String, 
+    default: "Sat - Thu"
   }
 }, {
   timestamps: true,
 });
 
-export default mongoose.models.Helper || mongoose.model("Helper", HelperSchema);
+HelperSchema.pre('save', function() {
+  if (this.tasks && this.tasks.length > 0) {
+    this.monthlyRate = this.tasks.reduce((sum, task) => sum + (task.price || 0), 0);
+  } else if (!this.monthlyRate) {
+    this.monthlyRate = 0;
+  }
+});
+
+delete mongoose.models.Helper;
+export default mongoose.model("Helper", HelperSchema);

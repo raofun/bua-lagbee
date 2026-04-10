@@ -21,13 +21,13 @@ export default function LoginPromptModal({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
+      {}
       <div 
         className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300" 
         onClick={onClose}
       ></div>
       
-      {/* Modal */}
+      {}
       <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden relative z-10 animate-in zoom-in-95 fade-in duration-300 border border-white/20">
         <div className="p-8">
           <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 mx-auto">

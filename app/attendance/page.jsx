@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import LoginPromptModal from "../components/LoginPromptModal";
+import { isAuthenticated } from "@/lib/auth";
 
 export default function Attendance() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,11 +11,11 @@ export default function Attendance() {
   const [selectedChores, setSelectedChores] = useState([]);
   const [days, setDays] = useState(1);
   const [preferredTime, setPreferredTime] = useState("Morning");
-  const [bookingStep, setBookingStep] = useState("selection"); // selection, matching, confirmed
+  const [bookingStep, setBookingStep] = useState("selection"); 
   const [selectedHelper, setSelectedHelper] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Chore Definitions
+  
   const chores = [
     { id: "cook", name: "Cooking", bn: "রান্না করা", rate: 250, icon: "restaurant" },
     { id: "clean", name: "Cleaning", bn: "ঘর পরিষ্কার", rate: 150, icon: "mop" },
@@ -23,19 +24,56 @@ export default function Attendance() {
     { id: "baby", name: "Baby Care", bn: "শিশু যত্ন", rate: 400, icon: "child_care" },
   ];
 
-  // Mock Available Helpers
-  const helpers = [
-    { id: "h1", name: "Mst. Salma Begum", rating: 4.9, shift: "Morning", hours: "8 AM - 12 PM", phone: "+880 1711-223344", exp: "5 years", jobs: 124 },
-    { id: "h2", name: "Fatema Khatun", rating: 4.7, shift: "Afternoon", hours: "1 PM - 5 PM", phone: "+880 1822-334455", exp: "3 years", jobs: 89 },
-    { id: "h3", name: "Kulsum Bibi", rating: 4.8, shift: "Evening", hours: "6 PM - 10 PM", phone: "+880 1933-445566", exp: "4 years", jobs: 112 },
-    { id: "h4", name: "Rahima Aktar", rating: 4.6, shift: "Morning", hours: "7 AM - 11 AM", phone: "+880 1744-556677", exp: "2 years", jobs: 45 },
-  ];
+  
+  const [dbHelpers, setDbHelpers] = useState([]);
+  const [isLoadingHelpers, setIsLoadingHelpers] = useState(false);
+
+  useEffect(() => {
+    const fetchHelpers = async () => {
+      setIsLoadingHelpers(true);
+      try {
+        const res = await fetch("/api/helpers?excludeImage=true");
+        const data = await res.json();
+        if (data.success) {
+          
+          const mapped = data.data.map(h => ({
+            id: h._id,
+            name: h.name,
+            rating: h.rating || 4.5,
+            shift: h.shift || "Morning",
+            hours: h.workingHours || "N/A",
+            phone: h.phone || "+880 17XX-XXXXXX",
+            exp: h.experience || "N/A",
+            jobs: h.reviews || 0
+          }));
+          setDbHelpers(mapped);
+        }
+      } catch (error) {
+        console.error("Failed to fetch helpers:", error);
+      } finally {
+        setIsLoadingHelpers(false);
+      }
+    };
+    fetchHelpers();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsLoggedIn(localStorage.getItem("mock_logged_in") === "true");
+      setIsLoggedIn(isAuthenticated());
     }
   }, []);
+
+  
+  useEffect(() => {
+    if (bookingStep !== "selection" || showLoginModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [bookingStep, showLoginModal]);
 
   const toggleChore = (id) => {
     setSelectedChores((prev) =>
@@ -66,24 +104,43 @@ export default function Attendance() {
     }, 1200);
   };
 
-  const handleHelperSelection = (helper) => {
+  const handleHelperSelection = async (helper) => {
     setSelectedHelper(helper);
     setIsProcessing(true);
-    setTimeout(() => {
-      setIsProcessing(false);
-      setBookingStep("confirmed");
-      // Optionally deduct from wallet here if we want to integrate
-      const total = calculateTotal();
-      const currentBalance = localStorage.getItem("wallet_balance");
-      if (currentBalance) {
-        localStorage.setItem("wallet_balance", (parseFloat(currentBalance) - total).toString());
+    
+    const total = calculateTotal();
+    const userId = localStorage.getItem("userId");
+
+    try {
+      const res = await fetch("/api/financials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          type: "Short Hire",
+          amount: total,
+          description: `GIG: ${selectedChores.join(', ')} for ${days} days with ${helper.name}`
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setBookingStep("confirmed");
+      } else {
+        alert(data.message || "Financial transaction failed");
+        setBookingStep("selection");
       }
-    }, 1500);
+    } catch (error) {
+      alert("Booking failed. Please check your connection.");
+      setBookingStep("selection");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-8 md:py-16 pb-32 bg-surface min-h-screen text-on-surface">
-      {/* Header */}
+      {}
       <div className="mb-10 text-center md:text-left">
         <h1 className="font-headline text-3xl md:text-4xl font-extrabold text-primary mb-2">
           Short Hiring / স্বল্পমেয়াদী নিয়োগ
@@ -95,10 +152,10 @@ export default function Attendance() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Left: Input Selection */}
+        {}
         <div className="lg:col-span-7 space-y-10">
           
-          {/* STEP 1: Chores */}
+          {}
           <section>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-black text-xs">1</div>
@@ -132,7 +189,7 @@ export default function Attendance() {
             </div>
           </section>
 
-          {/* STEP 2: Duration & Time */}
+          {}
           <section className="grid md:grid-cols-2 gap-8">
             <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
@@ -176,7 +233,7 @@ export default function Attendance() {
           </section>
         </div>
 
-        {/* Right: Booking Summary CARD */}
+        {}
         <div className="lg:col-span-5">
            <div className="sticky top-28">
               <div className="bg-slate-900 dark:bg-slate-800 rounded-[40px] p-10 text-white shadow-2xl relative overflow-hidden group">
@@ -231,7 +288,7 @@ export default function Attendance() {
                        )}
                     </button>
                  </div>
-                 {/* Decorative background glass */}
+                 {}
                  <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-[80px]"></div>
                  <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full blur-[60px]"></div>
               </div>
@@ -239,7 +296,7 @@ export default function Attendance() {
         </div>
       </div>
 
-      {/* MODALS LAYER */}
+      {}
       {bookingStep !== "selection" && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
@@ -247,26 +304,35 @@ export default function Attendance() {
             onClick={() => bookingStep === "matching" && !isProcessing && setBookingStep("selection")}
           ></div>
 
-          {/* STEP 2 MODAL: HELPER MATCHING */}
+          {}
           {bookingStep === "matching" && (
-            <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-[32px] shadow-2xl relative z-10 overflow-hidden animate-in zoom-in-95 border border-white/20">
-              <div className="p-8 md:p-12">
-                <div className="flex justify-between items-center mb-10">
+            <div className="bg-white dark:bg-slate-900 w-full max-w-2xl max-h-[90vh] rounded-[32px] shadow-2xl relative z-10 overflow-hidden flex flex-col animate-in zoom-in-95 border border-white/20">
+              {}
+              <div className="p-8 md:p-12 pb-6 border-b border-slate-50 dark:border-slate-800">
+                <div className="flex justify-between items-center">
                   <div>
                     <h3 className="font-headline text-3xl font-black text-slate-900 dark:text-white">Matching Helpers</h3>
                     <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">Available for {preferredTime} shift</p>
                   </div>
                   <button 
                     onClick={() => setBookingStep("selection")}
-                    className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+                    className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all"
                   >
                     <span className="material-symbols-outlined">close</span>
                   </button>
                 </div>
+              </div>
 
+              {}
+              <div className="p-8 md:p-12 pt-6 overflow-y-auto flex-1">
                 <div className="grid md:grid-cols-2 gap-4">
-                   {helpers.filter(h => h.shift === preferredTime).map(helper => (
-                     <div key={helper.id} className="p-6 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-3xl hover:border-primary transition-all group">
+                   {isLoadingHelpers ? (
+                     <div className="col-span-2 text-center py-10">
+                        <span className="material-symbols-outlined animate-spin text-primary text-4xl">refresh</span>
+                     </div>
+                   ) : dbHelpers.filter(h => h.shift === preferredTime).length > 0 ? (
+                     dbHelpers.filter(h => h.shift === preferredTime).map(helper => (
+                      <div key={helper.id} className="p-6 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-3xl hover:border-primary transition-all group">
                         <div className="flex items-start gap-4 mb-6">
                            <div className="w-16 h-16 bg-white dark:bg-slate-900 rounded-2xl flex items-center justify-center font-black text-xl text-primary border border-slate-200 dark:border-slate-700 shadow-sm">
                               {helper.name.split(' ').map(n => n[0]).join('')}
@@ -298,17 +364,23 @@ export default function Attendance() {
                         >
                           Select Helper
                         </button>
+                      </div>
+                    ))
+                   ) : (
+                     <div className="col-span-2 text-center py-12 bg-slate-50 dark:bg-slate-800/20 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <span className="material-symbols-outlined text-slate-300 text-[48px] mb-4">person_off</span>
+                        <p className="text-slate-500 font-bold">No helpers available for this shift. / এই শিফটে কেউ নেই।</p>
                      </div>
-                   ))}
+                   )}
                 </div>
               </div>
             </div>
           )}
 
-          {/* STEP 3 MODAL: CONFIRMATION & CONTACT */}
+          {}
           {bookingStep === "confirmed" && (
-            <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-[40px] shadow-2xl relative z-10 overflow-hidden animate-in slide-in-from-bottom-12 border-4 border-primary/20">
-              <div className="p-10 text-center">
+            <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] rounded-[40px] shadow-2xl relative z-10 overflow-hidden flex flex-col animate-in slide-in-from-bottom-12 border-4 border-primary/20">
+              <div className="p-10 overflow-y-auto flex-1 text-center">
                 <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-green-500/20 text-white relative">
                    <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
                    <span className="material-symbols-outlined text-[40px] relative z-10">verified</span>

@@ -1,0 +1,138 @@
+
+> bualagbe@0.1.0 lint
+> eslint
+
+
+/Users/raofun/Documents/Projects/bualagbe/app/admin/helpers/page.jsx
+    7:10  warning  'isLoading' is assigned a value but never used                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   54:17  warning  'ctx' is assigned a value but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  131:14  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  169:14  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  224:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  224:21  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+  296:24  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/raofun/Documents/Projects/bualagbe/app/admin/layout.jsx
+   8:12  warning  'isAdmin' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  20:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  18 |             router.push("/login?callback=/admin");
+  19 |         } else {
+> 20 |             setIsAdmin(true);
+     |             ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |             setIsLoading(false);
+  22 |         }
+  23 |     }, [router]);  react-hooks/set-state-in-effect
+
+/Users/raofun/Documents/Projects/bualagbe/app/admin/page.jsx
+  8:10  warning  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/admin/users/page.jsx
+    7:12  warning  'isLoading' is assigned a value but never used                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   45:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   74:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  115:57  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/raofun/Documents/Projects/bualagbe/app/api/admin/recharge/route.js
+  22:15  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/api/admin/stats/route.js
+  24:13  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/api/admin/users/route.js
+  22:18  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/api/users/[id]/route.js
+  28:13  warning  'role' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  28:19  warning  'balance' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:28  warning  'email' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/attendance/page.jsx
+    4:8   warning  'Link' is defined but never used   @typescript-eslint/no-unused-vars
+  120:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/components/BottomNav.jsx
+  14:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  12 |   useEffect(() => {
+  13 |     if (typeof window !== "undefined") {
+> 14 |       setIsLoggedIn(localStorage.getItem("mock_logged_in") === "true");
+     |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  15 |       setIsLoggedIn(localStorage.getItem("mock_logged_in") === "true");
+  16 |       setUserRole(localStorage.getItem("userRole") || "user");
+  17 |     }  react-hooks/set-state-in-effect
+
+/Users/raofun/Documents/Projects/bualagbe/app/components/TopNav.jsx
+  10:10  warning  'showProfileDropdown' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  10:31  warning  'setShowProfileDropdown' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  30:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  28 |   useEffect(() => {
+  29 |     if (typeof window !== "undefined") {
+> 30 |       setIsLoggedIn(localStorage.getItem("mock_logged_in") === "true");
+     |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  31 |       setUserRole(localStorage.getItem("userRole") || "user");
+  32 |     }
+  33 |   }, [pathname]);  react-hooks/set-state-in-effect
+
+/Users/raofun/Documents/Projects/bualagbe/app/financials/page.jsx
+   83:6   warning  React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  123:14  warning  'error' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+  169:14  warning  'error' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/helper-profile/[id]/page.jsx
+  64:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/raofun/Documents/Projects/bualagbe/app/layout.jsx
+  32:17  warning  Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged. See: https://nextjs.org/docs/messages/no-page-custom-font  @next/next/no-page-custom-font
+
+/Users/raofun/Documents/Projects/bualagbe/app/login/page.jsx
+    6:23  warning  'useGoogleOneTapLogin' is defined but never used  @typescript-eslint/no-unused-vars
+   26:22  warning  'err' is defined but never used                   @typescript-eslint/no-unused-vars
+   64:18  warning  'error' is defined but never used                 @typescript-eslint/no-unused-vars
+  183:42  warning  'err' is defined but never used                   @typescript-eslint/no-unused-vars
+
+/Users/raofun/Documents/Projects/bualagbe/app/page.jsx
+    9:11  warning  'router' is assigned a value but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  210:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/raofun/Documents/Projects/bualagbe/app/profile/page.jsx
+   74:16  warning  'err' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  112:14  warning  'err' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  177:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  285:15  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+/Users/raofun/Documents/Projects/bualagbe/lib/seed.js
+    1:18  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    2:16  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    3:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  116:20  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/raofun/Documents/Projects/bualagbe/scratch/check_db.js
+  1:18  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:16  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  3:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/raofun/Documents/Projects/bualagbe/scratch/test_helper_create.js
+  1:15  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+✖ 49 problems (12 errors, 37 warnings)
+
